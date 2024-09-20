@@ -57,3 +57,7 @@ cluster = "eu",
     )
 
     pusher_client.trigger("canalRegistrosTemperaturaHumedad", "registroTemperaturaHumedad", request.args)
+
+@app.route("/registro-usuario")
+def r_usuario():
+  return render_templates("registro-usuarios.html")
