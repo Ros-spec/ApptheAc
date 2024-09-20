@@ -60,4 +60,4 @@ cluster = "eu",
 
 @app.route("/registro-usuario")
 def r_usuario():
-  return render_templates("registro-usuarios.html")
+  return render_templates("us.html")
