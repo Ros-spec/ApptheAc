@@ -49,10 +49,10 @@ def buscar():
 @app.route("/registrar", methods=["GET"])
 def registrar():
     pusher_client = pusher.Pusher(
-        app_id="1714541",
-        key="2df86616075904231311",
-        secret="2f91d936fd43d8e85a1a",
-        cluster="us2",
+      app_id = "1766042"
+key = "b2cda443b1b3457d666e"
+secret = "4a6a830012d1f16d0619"
+cluster = "eu",
         ssl=True
     )
 
