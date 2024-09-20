@@ -60,4 +60,4 @@ cluster = "eu",
 
 @app.route("/us")
 def r_usuario():
-  return render_templates("us.html")
+  return render_template("us.html")
