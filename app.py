@@ -18,10 +18,14 @@ con = mysql.connector.connect(
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/tem")
 def index():
     con.close()
     return render_template("app.html")
+
+@app.route("/")
+def usuarios():
+  return render_template("usuarios.html")
 
 @app.route("/alumnos")
 def alumnos():
