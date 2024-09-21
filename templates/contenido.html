@@ -20,20 +20,20 @@
             <th scope="col">Contraseña</th>
           </tr>
         </thead>
-        <tbody id="tbodycontenido"></tbody>         
-        </table>
+        <tbody id="tbodyc"></tbody>         
+    </table>
 
     <script>
         window.addEventListener("load", function (event) {
             function buscar() {
                 $.get("/buscar", function (respuesta) {
-                    // console.log(respuesta)
+                    console.log(respuesta)
 
-                    $("#tbodyContenido").html("")
+                    $("#tbodyc").html("")
 
                     for (var x in respuesta) {
                         var c = respuesta[x]
-                        $("#tbodyContenido").append(`<tr>
+                        $("#tbodyc").append(`<tr>
                             <td>${c[1]}</td>
                             <td>${c[2]}</td>
                             <td>${C[3]}</td>
@@ -56,15 +56,14 @@
 
             //           Evento
             channel.bind("canalContenido", function (temperaturaHumedad) {
-                // alert("Ocurrió el evento")
+                alert("Ocurrió el evento")
                 // console.log(temperaturaHumedad)
                 /**
                 $("#tbodyTemperaturaHumedad").prepend(`<tr>
                     <td>${temperaturaHumedad.temperatura}</td>
                     <td>${temperaturaHumedad.humedad}</td>
                     <td></td>
-                </tr>`)
-                */
+                </tr>`) */
                 buscar()
             })
         })
