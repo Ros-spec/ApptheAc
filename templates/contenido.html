@@ -20,24 +20,55 @@
             <th scope="col">Contraseña</th>
           </tr>
         </thead>
+        <tbody id="tbodycontenido"></tbody>         
+        </table>
 
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-          </tr>
-        </tbody>
-      </table>
+    <script>
+        window.addEventListener("load", function (event) {
+            function buscar() {
+                $.get("/buscar", function (respuesta) {
+                    // console.log(respuesta)
+
+                    $("#tbodyContenido").html("")
+
+                    for (var x in respuesta) {
+                        var c = respuesta[x]
+                        $("#tbodyContenido").append(`<tr>
+                            <td>${c[1]}</td>
+                            <td>${c[2]}</td>
+                            <td>${C[3]}</td>
+                        </tr>`)
+                    }
+                })
+            }
+
+            buscar()
+
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true
+            
+            var pusher = new Pusher("2df86616075904231311", {
+                cluster: "us2"
+            })
+
+            //                            Canal
+            var channel = pusher.subscribe("canalContenido");
+
+            //           Evento
+            channel.bind("canalContenido", function (temperaturaHumedad) {
+                // alert("Ocurrió el evento")
+                // console.log(temperaturaHumedad)
+                /**
+                $("#tbodyTemperaturaHumedad").prepend(`<tr>
+                    <td>${temperaturaHumedad.temperatura}</td>
+                    <td>${temperaturaHumedad.humedad}</td>
+                    <td></td>
+                </tr>`)
+                */
+                buscar()
+            })
+        })
+    </script>
+    
 </body>
 </html>
