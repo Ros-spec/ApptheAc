@@ -57,5 +57,5 @@ def registrar():
     con.commit()
     con.close()
   
-    pusher_client.trigger("canalcontenido", "registroTemperaturaHumedad", request.args)
+    pusher_client.trigger("canalcontenido", "registrocontenido", request.args)
   return args
