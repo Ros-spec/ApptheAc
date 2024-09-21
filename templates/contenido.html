@@ -51,12 +51,11 @@
             Pusher.logToConsole = true
             
             var pusher = new Pusher("2df86616075904231311", {
-                cluster: "us2"
+                cluster: "eu"
             })
 
             //                            Canal
             var channel = pusher.subscribe("canalcontenido");
-
             //           Evento
             channel.bind("canalcontenido", function (mostrarcontenido) {
                 alert("Ocurrió el evento")
