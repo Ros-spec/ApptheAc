@@ -25,7 +25,7 @@ def index():
 
 @app.route("/")
 def usuarios():
-  return render_template("usuarios.html")
+  return render_template("registro.html")
 
 @app.route("/alumnos")
 def alumnos():
