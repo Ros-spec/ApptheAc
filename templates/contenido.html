@@ -32,16 +32,15 @@
                     $("#tbodyc").html("")
 
                     for (var x in respuesta) {
-                        var c = respuesta[x]
+                        var contenido = respuesta[x]
                         $("#tbodyc").append(`<tr>
-                            <td>${c[1]}</td>
-                            <td>${c[2]}</td>
-                            <td>${C[3]}</td>
+                            <td>${contenido[1]}</td>
+                            <td>${contenido[2]}</td>
+                            <td>${contenido[3]}</td>
                         </tr>`)
                     }
                 })
             }
-
             buscar()
 
             // Enable pusher logging - don't include this in production
@@ -52,18 +51,13 @@
             })
 
             //                            Canal
-            var channel = pusher.subscribe("canalContenido");
+            var channel = pusher.subscribe("canalcontenido");
 
             //           Evento
-            channel.bind("canalContenido", function (temperaturaHumedad) {
+            channel.bind("canalcontenido", function (mostrarcontenido) {
                 alert("Ocurrió el evento")
-                // console.log(temperaturaHumedad)
-                /**
-                $("#tbodyTemperaturaHumedad").prepend(`<tr>
-                    <td>${temperaturaHumedad.temperatura}</td>
-                    <td>${temperaturaHumedad.humedad}</td>
-                    <td></td>
-                </tr>`) */
+                console.log(mostrarcontenido)
+                
                 buscar()
             })
         })
