@@ -21,6 +21,10 @@ app = Flask(__name__)
 @app.route("/")
 def usuarios():
   return render_template("registro.html")
+  
+@app.route("/")
+def contenido():
+  return render_template("contenido.html")
 
 @app.route("/buscar")
 def buscar():
