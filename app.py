@@ -22,7 +22,7 @@ app = Flask(__name__)
 def usuarios():
   return render_template("registro.html")
   
-@app.route("/")
+@app.route("/contenido")
 def contenido():
   return render_template("contenido.html")
 
