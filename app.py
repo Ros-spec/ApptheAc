@@ -31,7 +31,7 @@ def buscar():
     if not con.is_connected():
         con.reconnect()
     cursor = con.cursor()
-    cursor.execute("SELECT * FROM sensor_log")
+    cursor.execute("SELECT * FROM tst0_usuarios")
 
     registros = cursor.fetchall()
 
