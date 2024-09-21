@@ -24,6 +24,7 @@ def usuarios():
   
 @app.route("/contenido")
 def contenido():
+  con.close()
   return render_template("contenido.html")
 
 @app.route("/buscar")
