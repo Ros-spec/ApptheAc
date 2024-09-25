@@ -52,11 +52,10 @@ pusher_client= pusher.Pusher(
     )
   
     sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
-    val = (args["Nombre"], args["Nombre"], args["Pass"] )
-    cursor.execute(sql, val)
+  val = ("4", "ros","MMM")
+    cursor.execute(sql)
     
     con.commit()
     con.close()
   
-    pusher_client.trigger("canal", "registrocontenido", request.args)
-  return args
+    pusher_client.trigger("canal", "registrocontenido")
