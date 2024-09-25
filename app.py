@@ -41,14 +41,11 @@ def buscar():
 @app.route("/registrar", methods=["GET"])
 def registrar():
   args = request.args
-
- if not con.is_connected():
-        con.reconnect()
-
+  
     cursor = con.cursor()
   
     sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
-    val = [("4", "ros", "MMM")]
+    val = (args["id"], args["nom"], args["con"])
     cursor.execute(sql, val)
     
     con.commit()
@@ -63,5 +60,4 @@ def registrar():
     )
 
     pusher_client.trigger("canal", "registrocontenido", args)
-
 return args
