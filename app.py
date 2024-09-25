@@ -39,9 +39,11 @@ def buscar():
 
     return registros
 
-@app.route("/registrar", methods=["GET"])
+@app.route("/registrar", methods=["POST"])
 def registrar():
-  args = request.args
+
+  nombre = request.form["txtnombre"]
+  contrasena = request.form["txtpass1"]
   
   if not con.is_connected():
         con.reconnect()
@@ -50,13 +52,17 @@ def registrar():
   
     sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
     #val = (args["id"], args["nom"], args["con"])
-    val= ("4","Ros","contra")    
+    val= ("4", nombre, contrasena)    
     cursor.execute(sql, val)
     
     con.commit()
     con.close()
 
-      pusher_client = pusher.Pusher(
+@app.route("/Evento")
+def registrar():
+args = request.args
+
+ pusher_client = pusher.Pusher(
       app_id = "1766042",
       key = "b4444a8caff165daf46a",
       secret = "1442ec24356a6e4ac6ce",
@@ -65,4 +71,4 @@ def registrar():
     )
 
     pusher_client.trigger("canal", "registrocontenido", args)
-return args
+return args  
