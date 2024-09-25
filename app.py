@@ -35,6 +35,7 @@ def buscar():
     cursor.execute("SELECT * FROM tst0_usuarios")
 
     registros = cursor.fetchall()
+    con.close()
 
     return registros
 
@@ -42,7 +43,10 @@ def buscar():
 def registrar():
   args = request.args
   
-    cursor = con.cursor()
+  if not con.is_connected():
+        con.reconnect()
+  
+  cursor = con.cursor()
   
     sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
     val = (args["id"], args["nom"], args["con"])
