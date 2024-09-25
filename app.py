@@ -51,9 +51,9 @@ pusher_client= pusher.Pusher(
       ssl=True
     )
   
-    sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
-  val = ("4", "ros","MMM")
-    cursor.execute(sql)
+    sql = "INSERT INTO tst0_usuarios(Id_Usuario, Nombre_Usuario, Contrasena) VALUES(%s, %s, %s)"
+    val = ("4", "ros","MMM")
+    cursor.execute(sql, val)
     
     con.commit()
     con.close()
