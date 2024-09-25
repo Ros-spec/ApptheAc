@@ -40,10 +40,7 @@ def buscar():
 
 @app.route("/registrar", methods=["POST"])
 def registrar():
-  # Nombre = request.form["txtname"]
-  # Pass = request.form["txtpass1"]
-  
-pusher_client = pusher.Pusher(
+  pusher_client = pusher.Pusher(
       app_id = "1766042",
       key = "b4444a8caff165daf46a",
       secret = "1442ec24356a6e4ac6ce",
