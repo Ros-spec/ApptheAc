@@ -50,12 +50,12 @@ def registrar():
       ssl=True
     )
   
-    sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
-    val = (args["id"], args["nom"], args["con"] )
-    cursor.execute(sql, val)
+    # sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
+    # val = (args["id"], args["nom"], args["con"] )
+    # cursor.execute(sql, val)
     
-    con.commit()
-    con.close()
+    # con.commit()
+    # con.close()
   
     pusher_client.trigger("canalcontenido", "registrocontenido", request.args)
   return args
