@@ -47,13 +47,7 @@ def registrar():
   
   args = request.args
   
-    pusher_client = pusher.Pusher(
-      app_id = "1766042",
-      key = "b2cda443b1b3457d666e",
-      secret = "4a6a830012d1f16d0619",
-      cluster = "eu",
-      ssl=True
-    )
+    pusher_client = pusher.Pusher(app_id = "1766042",key = "b4444a8caff165daf46a",secret = "1442ec24356a6e4ac6ce",cluster = "eu",ssl=True)
   
     sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
     val = (args["id"], args["nom"], args["con"] )
