@@ -43,11 +43,13 @@ def registrar():
   Nombre = request.form["txtname"]
   Pass = request.form["txtpass1"]
 
-  
-  
-  args = request.args
-  
-    pusher_client = pusher.Pusher(app_id = "1766042",key = "b4444a8caff165daf46a",secret = "1442ec24356a6e4ac6ce",cluster = "eu",ssl=True)
+pusher_client= pusher.Pusher(
+      app_id = "1766042",
+      key = "b4444a8caff165daf46a",
+      secret = "1442ec24356a6e4ac6ce",
+      cluster = "eu",
+      ssl=True
+    )
   
     sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
     val = (args["id"], args["nom"], args["con"] )
@@ -56,5 +58,5 @@ def registrar():
     con.commit()
     con.close()
   
-    pusher_client.trigger("canalcontenido", "registrocontenido", request.args)
+    pusher_client.trigger("canal", "registrocontenido", request.args)
   return args
