@@ -38,15 +38,14 @@ def buscar():
 
     return registros
 
-@app.route("/registrar", methods=["POST"])
+@app.route("/registrar", methods=["GET"])
 def registrar():
-  pusher_client = pusher.Pusher(
-      app_id = "1766042",
-      key = "b4444a8caff165daf46a",
-      secret = "1442ec24356a6e4ac6ce",
-      cluster = "eu",
-      ssl=True
-    )
+  args = request.args
+
+ if not con.is_connected():
+        con.reconnect()
+
+    cursor = con.cursor()
   
     sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
     val = [("4", "ros", "MMM")]
@@ -54,6 +53,15 @@ def registrar():
     
     con.commit()
     con.close()
-  
-    pusher_client.trigger("canal", "registrocontenido")
-return ""
+
+      pusher_client = pusher.Pusher(
+      app_id = "1766042",
+      key = "b4444a8caff165daf46a",
+      secret = "1442ec24356a6e4ac6ce",
+      cluster = "eu",
+      ssl=True
+    )
+
+    pusher_client.trigger("canal", "registrocontenido", args)
+
+return args
