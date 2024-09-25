@@ -35,10 +35,7 @@ def buscar():
     cursor.execute("SELECT * FROM tst0_usuarios")
 
     registros = cursor.fetchall()
-
-  sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
-    val= ("4", "ros", "123")    
-    cursor.execute(sql, val)
+    cursor.execute("INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES ("'4','ros','123' ")
     
     con.close()
 
