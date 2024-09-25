@@ -40,8 +40,8 @@ def buscar():
 
 @app.route("/registrar", methods=["POST"])
 def registrar():
-  Nombre = request.form["txtname"]
-  Pass = request.form["txtpass1"]
+  # Nombre = request.form["txtname"]
+  # Pass = request.form["txtpass1"]
   
 pusher_client= pusher.Pusher(
       app_id = "1766042",
@@ -52,7 +52,7 @@ pusher_client= pusher.Pusher(
     )
   
     sql = "INSERT INTO tst0_usuarios(Id_Usuario, Nombre_Usuario, Contrasena) VALUES(%s, %s, %s)"
-    val = ("4", "ros","MMM")
+    val = ["4", "ros","MMM"]
     cursor.execute(sql, val)
     
     con.commit()
