@@ -43,7 +43,7 @@ def registrar():
   # Nombre = request.form["txtname"]
   # Pass = request.form["txtpass1"]
   
-pusher_client= pusher.Pusher(
+pusher_client = pusher.Pusher(
       app_id = "1766042",
       key = "b4444a8caff165daf46a",
       secret = "1442ec24356a6e4ac6ce",
@@ -52,9 +52,7 @@ pusher_client= pusher.Pusher(
     )
   
     sql = "INSERT INTO tst0_usuarios(Id_Usuario, Nombre_Usuario, Contrasena) VALUES(%s, %s, %s)"
-    val = [
-      ("4", "ros","MMM")
-    ]
+    val = [("4", "ros", "MMM")]
     cursor.execute(sql, val)
     
     con.commit()
