@@ -41,26 +41,22 @@ def buscar():
 
 @app.route("/registrar", methods=["POST"])
 def registrar():
+ args = request.args
+
+    if not con.is_connected():
+        con.reconnect()
+
+    cursor = con.cursor()
 
   nombre = request.form["txtnombre"]
   contrasena = request.form["txtpass1"]
   
-  if not con.is_connected():
-        con.reconnect()
-  
-  cursor = con.cursor()
-  
     sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
-    #val = (args["id"], args["nom"], args["con"])
     val= ("4", nombre, contrasena)    
     cursor.execute(sql, val)
     
     con.commit()
     con.close()
-
-@app.route("/Evento")
-def registrar():
-args = request.args
 
  pusher_client = pusher.Pusher(
       app_id = "1766042",
