@@ -48,7 +48,7 @@ def registrar():
       ssl=True
     )
   
-    sql = "INSERT INTO tst0_usuarios(Id_Usuario, Nombre_Usuario, Contrasena) VALUES(%s, %s, %s)"
+    sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
     val = [("4", "ros", "MMM")]
     cursor.execute(sql, val)
     
