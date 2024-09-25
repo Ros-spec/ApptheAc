@@ -59,3 +59,4 @@ pusher_client = pusher.Pusher(
     con.close()
   
     pusher_client.trigger("canal", "registrocontenido")
+return ""
