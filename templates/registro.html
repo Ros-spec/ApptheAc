@@ -62,14 +62,13 @@
 
             // Canal ---> Donde se concentran los hilos con los clientes conectados
             var channel = pusher.subscribe("canal");
-
             // Evento --> El código que se accionará con la información enviada o el uso del canal
-            channel.bind("registro", function (Function) {
+            channel.bind("registro", function (datos) {
                  // 1. Notificar el evento
                 alert("Ocurrió el evento")
 
                 // 2. Recibir información enviada en el evento
-                // console.log(temperaturaHumedad)
+                console.log(datos)
 
                 // 3. Trabajar información enviada por el evento
                 /**
