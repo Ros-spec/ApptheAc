@@ -41,27 +41,29 @@ def buscar():
 
 @app.route("/registrar", methods=["POST"])
 def registrar():
- args = request.args
+    args = request.args
 
-  nombre = request.form["txtnombre"]
-  contrasena = request.form["txtpass1"]
-  
-     sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
-     val= ("4", nombre, contrasena)    
+    nombre = request.form["txtnombre"]
+    contrasena = request.form["txtpass1"]
+    
+    sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
+    val = (4, nombre, contrasena)  # Cambia "4" a 4 si es un entero.
+
     try:
-    cursor.execute(sql, val)
-    con.commit()  # Asegúrate de hacer commit si es necesario
+        cursor.execute(sql, val)
+        con.commit()  # Asegúrate de hacer commit si es necesario
     except Exception as e:
-    print("Ocurrió un error:", e)
-    con.close()
+        print("Ocurrió un error:", e)
+    finally:
+        con.close()  # Asegúrate de cerrar la conexión
 
- pusher_client = pusher.Pusher(
-      app_id = "1766042",
-      key = "b4444a8caff165daf46a",
-      secret = "1442ec24356a6e4ac6ce",
-      cluster = "eu",
-      ssl=True
+    pusher_client = pusher.Pusher(
+        app_id="1766042",
+        key="b4444a8caff165daf46a",
+        secret="1442ec24356a6e4ac6ce",
+        cluster="eu",
+        ssl=True
     )
 
     pusher_client.trigger("canal", "registrocontenido", args)
-return args  
+    return args
