@@ -44,6 +44,11 @@ def buscar():
 def registrar():
     args = request.args
   
+    if not con.is_connected():
+        con.reconnect()
+
+    cursor = con.cursor()
+
     sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
     val = (4, "", "")  # Cambia "4" a 4 si es un entero.
 
