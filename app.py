@@ -66,4 +66,4 @@ def registrar():
     )
 
     pusher_client.trigger("canal", "registrocontenido", args)
-    return args
+  return render_template("registro.html")
