@@ -42,7 +42,6 @@ def buscar():
 @app.route("/registrar", methods=["POST"])
 def registrar():
  args = request.args
-    cursor = con.cursor()
 
   nombre = request.form["txtnombre"]
   contrasena = request.form["txtpass1"]
