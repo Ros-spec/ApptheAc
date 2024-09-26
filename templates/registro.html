@@ -53,34 +53,6 @@
     </h1><br>
     <hr>
 
-    <script>
-            Pusher.logToConsole = true
-            
-            var pusher = new Pusher("2df86616075904231311", {
-                cluster: "us2"
-            })
-
-            // Canal ---> Donde se concentran los hilos con los clientes conectados
-            var channel = pusher.subscribe("canal");
-            // Evento --> El código que se accionará con la información enviada o el uso del canal
-            channel.bind("registro", function (datos) {
-                 // 1. Notificar el evento
-                alert("Ocurrió el evento")
-
-                // 2. Recibir información enviada en el evento
-                console.log(datos)
-
-                // 3. Trabajar información enviada por el evento
-                /**
-                $("#tbodyTemperaturaHumedad").prepend(`<tr>
-                    <td>${temperaturaHumedad.temperatura}</td>
-                    <td>${temperaturaHumedad.humedad}</td>
-                    <td></td>
-                </tr>`)
-                */
-
-            })
-        })
-    </script>    
+   
 </body>
 </html>
