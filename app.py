@@ -40,15 +40,11 @@ def buscar():
     con.close()
     return registros
 
-@app.route("/registrar", methods=["POST"])
+@app.route("/registrar", methods=["GET"])
 def registrar():
     args = request.args
-
-    nombre = request.form["txtnombre"]
-    contrasena = request.form["txtpass1"]
-    
     sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
-    val = (4, nombre, contrasena)  # Cambia "4" a 4 si es un entero.
+    val = (4, "", "")  # Cambia "4" a 4 si es un entero.
 
     try:
         cursor.execute(sql, val)
@@ -68,9 +64,3 @@ def registrar():
 
     pusher_client.trigger("canal", "registrocontenido", args)
   return args
-
-
-
-@app.route("/registrar")
-def regresar():
-   return render_template("registro.html")
