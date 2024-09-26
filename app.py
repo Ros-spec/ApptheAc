@@ -1,3 +1,4 @@
+
 from flask import Flask
 
 from flask import render_template
@@ -66,4 +67,10 @@ def registrar():
     )
 
     pusher_client.trigger("canal", "registrocontenido", args)
-  return render_template("registro.html")
+  return args
+
+
+
+@app.route("/registrar")
+def regresar():
+   return render_template("registro.html")
