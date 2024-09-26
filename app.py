@@ -35,10 +35,8 @@ def buscar():
     cursor.execute("SELECT * FROM tst0_usuarios")
 
     registros = cursor.fetchall()
-    cursor.execute("INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES ("'4','ros','123' ")
     
     con.close()
-
     return registros
 
 @app.route("/registrar", methods=["POST"])
@@ -49,11 +47,13 @@ def registrar():
   nombre = request.form["txtnombre"]
   contrasena = request.form["txtpass1"]
   
-    # sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
-    # val= ("4", nombre, contrasena)    
-    # cursor.execute(sql, val)
-    
-    con.commit()
+     sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
+     val= ("4", nombre, contrasena)    
+    try:
+    cursor.execute(sql, val)
+    con.commit()  # Asegúrate de hacer commit si es necesario
+    except Exception as e:
+    print("Ocurrió un error:", e)
     con.close()
 
  pusher_client = pusher.Pusher(
