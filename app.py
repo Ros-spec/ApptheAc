@@ -56,7 +56,7 @@ def contenido():
 
 @app.route("/registrar", methods=["GET"])
 def registrar():
-  # args = request.args
+  args = request.args
 
 
   #   sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
