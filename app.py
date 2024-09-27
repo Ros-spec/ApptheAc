@@ -32,7 +32,7 @@ def guardar():
 def buscar():
     con = get_db_connection()
     cursor = con.cursor()
-    cursor.execute("SELECT * FROM tst0_usuarios")
+    cursor.execute(""SELECT * FROM sensor_log ORDER BY Id_Log DESC")
     registros = cursor.fetchall()
     cursor.close()
     con.close()
@@ -40,6 +40,14 @@ def buscar():
 
 @app.route("/contenido")
 def contenido():
+     con = get_db_connection()
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM tst0_usuarios")
+    registros = cursor.fetchall()
+    cursor.close()
+    con.close()
+    return {"registros": registros} 
+    
     return render_template("contenido.html")
 
 @app.route("/registrar", methods=["GET"])
