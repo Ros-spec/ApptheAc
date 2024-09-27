@@ -56,6 +56,33 @@ def contenido():
 
 @app.route("/registrar", methods=["GET"])
 def registrar():
+    args = request.args
+
+    if not con.is_connected():
+        con.reconnect()
+
+    cursor = con.cursor()
+
+    sql = "INSERT INTO sensor_log (Temperatura, Humedad, Fecha_Hora) VALUES (%s, %s, %s)"
+    val = (args["temperatura"], args["humedad"], datetime.datetime.now(pytz.timezone("America/Matamoros")))
+    cursor.execute(sql, val)
+    
+    con.commit()
+    con.close()
+
+    pusher_client = pusher.Pusher(
+        app_id="1766042",
+        key="b4444a8caff165daf46a",
+        secret="1442ec24356a6e4ac6ce",
+        cluster="eu",
+        ssl=True
+    )
+
+    pusher_client.trigger("canalRegistrosTemperaturaHumedad", "registroTemperaturaHumedad", args)
+    return args
+
+@app.route("/reg", methods=["GET"])
+def registrar():
   args = request.args
 
 
