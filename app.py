@@ -29,7 +29,7 @@ def alumnos():
   return render_template("alumnos.html")
   
   @app.route("/alumnos/guardar", methods=["POST"])
-def alumnosGuardar():
+def guardar():
     con.close()
     matricula      = request.form["txtMatriculaFA"]
     nombreapellido = request.form["txtNombreApellidoFA"]
@@ -82,7 +82,7 @@ def registrar():
     return args
 
 @app.route("/reg", methods=["GET"])
-def registrar():
+def reg():
   args = request.args
 
 
