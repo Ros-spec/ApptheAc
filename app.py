@@ -61,13 +61,13 @@ def registrar():
     #     con.close()  # Asegúrate de cerrar la conexión
     
 
-    pusher_client = pusher.Pusher(
-        app_id="1766042",
-        key="b4444a8caff165daf46a",
-        secret="1442ec24356a6e4ac6ce",
-        cluster="eu",
-        ssl=True
-    )
+    # pusher_client = pusher.Pusher(
+    #     app_id="1766042",
+    #     key="b4444a8caff165daf46a",
+    #     secret="1442ec24356a6e4ac6ce",
+    #     cluster="eu",
+    #     ssl=True
+    # )
 
-    pusher_client.trigger("canal", "registrocontenido", args)
+    # pusher_client.trigger("canal", "registrocontenido", args)
   return args
