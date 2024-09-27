@@ -43,7 +43,6 @@ def buscar():
 @app.route("/registrar", methods=["GET"])
 def registrar():
   args = request.args
-         con.reconnect()
 
     cursor = con.cursor()
 
