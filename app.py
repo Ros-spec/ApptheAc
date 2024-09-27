@@ -16,6 +16,7 @@ con = mysql.connector.connect(
   user="u760464709_tst_sep_usr",
   password="dJ0CIAFF="
 )
+    cursor = con.cursor()
 
 app = Flask(__name__)
 
@@ -44,7 +45,6 @@ def buscar():
 def registrar():
   args = request.args
 
-    cursor = con.cursor()
 
     sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
     val = (9, args["txtname"], args["txtpass1"])  # Cambia "4" a 4 si es un entero.
