@@ -44,8 +44,8 @@ def buscar():
 def registrar():
   args = request.args
   
-    # if not con.is_connected():
-    #     con.reconnect()
+     if not con.is_connected():
+         con.reconnect()
 
     cursor = con.cursor()
 
