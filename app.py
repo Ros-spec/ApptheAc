@@ -47,18 +47,18 @@ def registrar():
     # if not con.is_connected():
     #     con.reconnect()
 
-    # cursor = con.cursor()
+    cursor = con.cursor()
 
-    # sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
-    # val = (4, "", "")  # Cambia "4" a 4 si es un entero.
+    sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
+    val = (9, args["txtname"], args["txtpass1"])  # Cambia "4" a 4 si es un entero.
 
-    # try:
-    #     cursor.execute(sql, val)
-    #     con.commit()  # Asegúrate de hacer commit si es necesario
-    # except Exception as e:
-    #     print("Ocurrió un error:", e)
-    # finally:
-    #     con.close()  # Asegúrate de cerrar la conexión
+     try:
+         cursor.execute(sql, val)
+         con.commit()  # Asegúrate de hacer commit si es necesario
+     except Exception as e:
+         print("Ocurrió un error:", e)
+     finally:
+         con.close()  # Asegúrate de cerrar la conexión
     
 
     # pusher_client = pusher.Pusher(
