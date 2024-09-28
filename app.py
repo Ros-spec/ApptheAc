@@ -88,7 +88,7 @@ def registrar():
 
 
 @app.route("/practica", methods=["GET"])
-def app():
+def fun():
     args = request.args
     return render_template("registro.html")
 
