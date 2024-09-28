@@ -36,7 +36,7 @@ def buscar():
     registros = cursor.fetchall()
     cursor.close()
     con.close()
-    return {"registros": registros}  # Devuelve como JSON
+    return registros # Devuelve como JSON
 
 @app.route("/contenido")
 def contenido():
