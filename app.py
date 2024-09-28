@@ -89,13 +89,9 @@ def registrar():
 
 @app.route("/practica", methods=["GET"])
 def app():
-    
+    args = request.args
     return render_template("registro.html")
 
-@app.route("/reg", methods=["GET"])
-def reg():
-    args = request.args
-    return args  # Puedes agregar lógica adicional aquí
 
 if __name__ == "__main__":
     app.run(debug=True)
