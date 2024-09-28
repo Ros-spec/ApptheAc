@@ -86,6 +86,11 @@ def registrar():
     pusher_client.trigger("canalRegistrosTemperaturaHumedad", "registroTemperaturaHumedad", args)
     return args
 
+
+@app.route("/")
+def app():
+    return render_template(".html")
+
 @app.route("/reg", methods=["GET"])
 def reg():
     args = request.args
