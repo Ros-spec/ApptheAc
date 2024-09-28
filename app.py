@@ -87,9 +87,10 @@ def registrar():
     return args
 
 
-@app.route("/")
+@app.route("/practica", methods=["GET"])
 def app():
-    return render_template(".html")
+    
+    return render_template("registro.html")
 
 @app.route("/reg", methods=["GET"])
 def reg():
