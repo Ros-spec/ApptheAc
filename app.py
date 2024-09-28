@@ -40,15 +40,23 @@ def buscar():
 
 @app.route("/contenido")
 def contenido():
-     con = get_db_connection()
-    cursor = con.cursor()
-    cursor.execute("SELECT * FROM tst0_usuarios")
-    registros = cursor.fetchall()
-    cursor.close()
-    con.close()
-    return {"registros": registros} 
-    
-    return render_template("contenido.html")
+    try:
+        con = get_db_connection()  # Asegúrate de que esto funcione
+        cursor = con.cursor()  # Esto puede fallar si la conexión es None
+        cursor.execute("SELECT * FROM tst0_usuarios")
+        registros = cursor.fetchall()
+    except mysql.connector.Error as err:
+        return f"Error al acceder a la base de datos: {err}", 500
+    except Exception as e:
+        return f"Ocurrió un error: {e}", 500
+    finally:
+        if cursor:
+            cursor.close()  # Asegúrate de cerrar el cursor si fue creado
+        if con:
+            con.close()  # Asegúrate de cerrar la conexión si fue creada
+
+    return render_template("contenido.html", registros=registros)
+
 
 @app.route("/registrar", methods=["GET"])
 def registrar():
