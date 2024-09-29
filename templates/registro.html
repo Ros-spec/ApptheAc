@@ -96,8 +96,11 @@ window.addEventListener("load", function (event) {
         // Enviar el formulario mediante AJAX
         $("#formR").submit(function (event) {
             event.preventDefault();  // Evita el envío tradicional del formulario
-
-            var formData = $(this).serialize();  // Serializa los datos del formulario
+            
+        var id = $("#txtid").val();  // Asumiendo que el campo tiene id="txtid"
+        var nombre = $("#txtnombre").val();  // Asumiendo que el campo tiene id="txtnombre"
+        var password = $("#txtpass1").val(); 
+        var formData = $(this).serialize();  // Serializa los datos del formulario
 
            fetch('/guardardatos', {
     method: 'POST',
@@ -108,11 +111,22 @@ window.addEventListener("load", function (event) {
         'txtid': id,
         'txtnombre': nombre,
         'txtpass1': password
-    })
-});
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Manejar la respuesta del servidor
+            if (data.success) {
+                console.log(data.message);
+            } else {
+                console.error(data.message);
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
         });
     });
-        
+});
     </script>
     
 </body>
