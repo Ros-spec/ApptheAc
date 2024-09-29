@@ -17,12 +17,12 @@
 
 <body> <br> <hr><br>
     <h1>
-        <form accion="/registrar" method="POST" class=""><fieldset>
+        <form accion="/guardardatos" method="POST" class="" id="formR"><fieldset>
             
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="inputnumber">ID</label>
-                    <input type="number" class="form-control" id="txtid" name="txtid" placeholder="ID del usuario" readonly>
+                    <input type="number" class="form-control" id="txtid" name="txtid" placeholder="ID del usuario">
                   </div>
 
                   <div class="form-group col-md-6">
@@ -53,6 +53,33 @@
     </h1><br>
     <hr>
 
-   
+    <script>
+        // Validación del formulario con jQuery
+        $(document).ready(function() {
+            $("#formR").validate({
+                messages: {
+                    txtid: {
+                        required: "Por favor, introduce un ID de experiencia."
+                    },
+                    txtnombre: {
+                        required: "Por favor, introduce tu nombre y apellido.",
+                        minlength: "Debes introducir al menos 10 caracteres.",
+                        maxlength: "No puedes exceder los 50 caracteres."
+                    },
+                    txtpass1: {
+                        required: "Por favor, introduce un comentario.",
+                        minlength: "Debes introducir al menos 10 caracteres.",
+                        maxlength: "No puedes exceder los 50 caracteres."
+                    },
+                    txtpass2: {
+                        required: "Por favor, introduce una calificación.",
+                        min: "La calificación mínima es 0.",
+                        max: "La calificación máxima es 5."
+                    }
+                }
+            });
+        });
+    </script>
+    
 </body>
 </html>
