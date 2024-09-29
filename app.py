@@ -87,10 +87,48 @@ def registrar():
     return args
 
 
-@app.route("/practica", methods=["GET"])
+@app.route("/guardardatos", methods=["POST"])
 def fun():
-    args = request.args
-    return render_template("registro.html")
+  def guardar_encuesta():
+    try:
+        # Verificar que la conexión esté activa
+        if not con.is_connected():
+            con.reconnect()
+
+        # Obtener los datos del formulario
+        id = request.form["txtid"]
+        nombre = request.form["txtnombre"]
+        contra = request.form["txtpass1"]
+
+        cursor = con.cursor()
+
+        # Inserción en la base de datos
+        sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
+        val = (id, nombre, contra)
+        cursor.execute(sql, val)
+        con.commit()
+
+        # Disparar el evento con Pusher para actualizar en tiempo real
+        pusher_client = pusher.Pusher(
+            app_id="1766042",
+            key="b4444a8caff165daf46a",
+            secret="1442ec24356a6e4ac6ce",
+            cluster="eu",
+            ssl=True
+        )
+        
+        pusher_client.trigger("registro", "nuevo", {
+            "ID": id,
+            "nombre": nombre,
+            "contraseña": contra
+        })
+
+        # Devolver una respuesta JSON de éxito
+        return jsonify({"success": True, "message": "Encuesta guardada exitosamente!"})
+
+    except mysql.connector.Error as err:
+        print(f"Error al guardar la encuesta: {err}")
+        return jsonify({"success": False, "message": f"Error al guardar la encuesta: {err}"}), 500
 
 
 if __name__ == "__main__":
