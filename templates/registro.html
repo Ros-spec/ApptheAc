@@ -70,6 +70,11 @@
         return regex.test(value);
     }, "El nombre de usuario solo puede contener letras y números, sin espacios ni caracteres especiales.");
 
+ $.validator.addMethod("igualPassword", function(value, element) {
+        return value === $("#txtpass1").val();
+    }, "Las contraseñas deben coincidir.");
+
+           
     $("#formR").validate({
         rules: {
             txtid: {
