@@ -40,14 +40,11 @@ def guardar():
 
 @app.route("/contenido")
 def contenido():
-    try:
+
         con = get_db_connection()  # Asegúrate de que esto funcione
         cursor = con.cursor()  # Esto puede fallar si la conexión es None
         cursor.execute("SELECT * FROM tst0_usuarios")
         registros = cursor.fetchall()
-           
-            con.close()  # Asegúrate de cerrar la conexión si fue creada
-
     return render_template("contenido.html")
 
 
