@@ -28,15 +28,15 @@ def guardar():
     nombreapellido = request.form.get("txtNombreApellidoFA")
     return f"Matrícula {matricula} Nombre y Apellido {nombreapellido}"
 
-# @app.route("/buscar")
-# def buscar():
-#     con = get_db_connection()
-#     cursor = con.cursor()
-#     cursor.execute("SELECT * FROM sensor_log ORDER BY Id_Log DESC")
-#     registros = cursor.fetchall()
-#     cursor.close()
-#     con.close()
-#     return registros # Devuelve como JSON
+@app.route("/buscar")
+def buscar():
+    con = get_db_connection()
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM tst0_usuarios ORDER BY Id_Usuarios DESC")
+    registros = cursor.fetchall()
+    cursor.close()
+    con.close()
+    return registros # Devuelve como JSON
 
 # @app.route("/contenido")
 # def contenido():
