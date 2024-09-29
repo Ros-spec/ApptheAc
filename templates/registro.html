@@ -98,22 +98,17 @@ window.addEventListener("load", function (event) {
 
             var formData = $(this).serialize();  // Serializa los datos del formulario
 
-            $.ajax({
-                url: "/guardardatos",  // URL de la API para guardar
-                method: "POST",            // Usa el método POST
-                data: formData,            // Envía los datos serializados
-                success: function (response) {
-                    if (response.success) {
-                        alert("Encuesta guardada exitosamente!");
-                        $("#formR")[0].reset();  // Limpia el formulario
-                    } else {
-                        alert("Error al guardar la encuesta: " + response.message);
-                    }
-                },
-                error: function (xhr, status, error) {
-                    alert("Ocurrió un error al intentar guardar la encuesta: " + error);
-                }
-            });
+           fetch('/guardardatos', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+        'txtid': id,
+        'txtnombre': nombre,
+        'txtpass1': password
+    })
+});
         });
     });
         
