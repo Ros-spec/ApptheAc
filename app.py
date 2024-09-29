@@ -32,11 +32,11 @@ def guardar():
 def buscar():
     con = get_db_connection()
     cursor = con.cursor()
-    cursor.execute("SELECT * FROM tst0_usuarios ORDER BY Id_Usuarios DESC")
+    cursor.execute("SELECT * FROM tst0_usuarios")
     registros = cursor.fetchall()
     cursor.close()
     con.close()
-    return jsonify(registros)  # Asegúrate de devolver como JSON
+    return registros 
 
 @app.route("/registrar", methods=["GET"])
 def registrar():
