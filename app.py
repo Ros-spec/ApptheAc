@@ -45,17 +45,11 @@ def contenido():
         cursor = con.cursor()  # Esto puede fallar si la conexión es None
         cursor.execute("SELECT * FROM tst0_usuarios")
         registros = cursor.fetchall()
-    except mysql.connector.Error as err:
-        return f"Error al acceder a la base de datos: {err}", 500
-    except Exception as e:
-        return f"Ocurrió un error: {e}", 500
-    finally:
-        if cursor:
             cursor.close()  # Asegúrate de cerrar el cursor si fue creado
-        if con:
+ 
             con.close()  # Asegúrate de cerrar la conexión si fue creada
 
-    return render_template("contenido.html", registros=registros)
+    return render_template("contenido.html")
 
 
 @app.route("/registrar", methods=["GET"])
