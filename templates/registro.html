@@ -79,6 +79,44 @@
                 }
             });
         });
+
+window.addEventListener("load", function (event) {
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher("2df86616075904231311", {
+            cluster: "us2"
+        });
+
+        var channel = pusher.subscribe("registro");
+
+        channel.bind("nuevo", function (registro) {
+        });
+
+        // Enviar el formulario mediante AJAX
+        $("#formR").submit(function (event) {
+            event.preventDefault();  // Evita el envío tradicional del formulario
+
+            var formData = $(this).serialize();  // Serializa los datos del formulario
+
+            $.ajax({
+                url: "/guardardatos",  // URL de la API para guardar
+                method: "POST",            // Usa el método POST
+                data: formData,            // Envía los datos serializados
+                success: function (response) {
+                    if (response.success) {
+                        alert("Encuesta guardada exitosamente!");
+                        $("#formR")[0].reset();  // Limpia el formulario
+                    } else {
+                        alert("Error al guardar la encuesta: " + response.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("Ocurrió un error al intentar guardar la encuesta: " + error);
+                }
+            });
+        });
+    });
+        
     </script>
     
 </body>
