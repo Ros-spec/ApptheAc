@@ -79,10 +79,11 @@ def registrar():
 def resdatos():
     return render_template("registro.html")
 
+@app.route("/guardardatos")
+def resdatos():
+    return guardardatos()
 
-@app.route("/guardardatos", methods=["POST"])
-def fun():
-  def guardar_encuesta():
+  def guardardatos():
     try:
         # Verificar que la conexión esté activa
         if not con.is_connected():
