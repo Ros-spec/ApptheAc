@@ -38,14 +38,13 @@ def guardar():
 #     con.close()
 #     return registros # Devuelve como JSON
 
-@app.route("/contenido")
-def contenido():
-
-        con = get_db_connection()  # Asegúrate de que esto funcione
-        cursor = con.cursor()  # Esto puede fallar si la conexión es None
-        cursor.execute("SELECT * FROM tst0_usuarios")
-        registros = cursor.fetchall()
-    return render_template("contenido.html")
+# @app.route("/contenido")
+# def contenido():
+#         con = get_db_connection()  # Asegúrate de que esto funcione
+#         cursor = con.cursor()  # Esto puede fallar si la conexión es None
+#         cursor.execute("SELECT * FROM tst0_usuarios")
+#         registros = cursor.fetchall()
+#     return render_template("contenido.html")
 
 
 @app.route("/registrar", methods=["GET"])
