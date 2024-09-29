@@ -45,8 +45,7 @@ def contenido():
         cursor = con.cursor()  # Esto puede fallar si la conexión es None
         cursor.execute("SELECT * FROM tst0_usuarios")
         registros = cursor.fetchall()
-            cursor.close()  # Asegúrate de cerrar el cursor si fue creado
- 
+           
             con.close()  # Asegúrate de cerrar la conexión si fue creada
 
     return render_template("contenido.html")
