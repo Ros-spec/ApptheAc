@@ -76,7 +76,7 @@ def registrar():
     return args
 
 @app.route("/datos")
-def resdatos():
+def data():
     return render_template("registro.html")
 
 @app.route("/guardardatos")
