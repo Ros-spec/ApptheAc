@@ -56,30 +56,61 @@
 
     <script>
         // Validación del formulario con jQuery
-        $(document).ready(function() {
-            $("#formR").validate({
-                messages: {
-                    txtid: {
-                        required: "Por favor, introduce un ID de experiencia."
-                    },
-                    txtnombre: {
-                        required: "Por favor, introduce tu nombre y apellido.",
-                        minlength: "Debes introducir al menos 10 caracteres.",
-                        maxlength: "No puedes exceder los 50 caracteres."
-                    },
-                    txtpass1: {
-                        required: "Por favor, introduce un comentario.",
-                        minlength: "Debes introducir al menos 10 caracteres.",
-                        maxlength: "No puedes exceder los 50 caracteres."
-                    },
-                    txtpass2: {
-                        required: "Por favor, introduce una calificación.",
-                        min: "La calificación mínima es 0.",
-                        max: "La calificación máxima es 5."
-                    }
-                }
-            });
-        });
+       $(document).ready(function() {
+    // Añadir el método de validación para el nombre de usuario
+    $.validator.addMethod("usuarioValido", function(value, element) {
+        // Verificar que no esté vacío
+        if (!value) return false;
+        
+        // Verificar longitud
+        if (value.length < 5 || value.length > 20) return false;
+        
+        // Verificar caracteres permitidos (letras y números)
+        const regex = /^[A-Za-z0-9]+$/;
+        return regex.test(value);
+    }, "El nombre de usuario solo puede contener letras y números, sin espacios ni caracteres especiales.");
+
+    $("#formR").validate({
+        rules: {
+            txtid: {
+                required: true
+            },
+            txtnombre: {
+                required: true,
+                usuarioValido: true, 
+                minlength: 5,
+                maxlength: 20
+            },
+            txtpass1: {
+                required: true,
+                minlength: 8,
+                maxlength: 20
+            },
+            txtpass2: {
+                required: true,
+            }
+        },
+        messages: {
+            txtid: {
+                required: "Por favor, introduce un ID de experiencia."
+            },
+            txtnombre: {
+                required: "Por favor, introduce tu nombre y apellido.",
+                minlength: "Debes introducir al menos 5 caracteres.",
+                maxlength: "No puedes exceder los 20 caracteres."
+            },
+            txtpass1: {
+                required: "Por favor, introduce la contraseña",
+                minlength: "Debes introducir al menos 8 caracteres.",
+                maxlength: "No puedes exceder los 20 caracteres."
+            },
+            txtpass2: {
+                required: "Favor de introducir la confirmación de la contraseña.",
+            }
+        }
+    });
+});
+
 
 window.addEventListener("load", function (event) {
         Pusher.logToConsole = true;
