@@ -36,16 +36,7 @@ def buscar():
     registros = cursor.fetchall()
     cursor.close()
     con.close()
-    return registros # Devuelve como JSON
-
-# @app.route("/contenido")
-# def contenido():
-#         con = get_db_connection()  # Asegúrate de que esto funcione
-#         cursor = con.cursor()  # Esto puede fallar si la conexión es None
-#         cursor.execute("SELECT * FROM tst0_usuarios")
-#         registros = cursor.fetchall()
-#     return render_template("contenido.html")
-
+    return jsonify(registros)  # Asegúrate de devolver como JSON
 
 @app.route("/registrar", methods=["GET"])
 def registrar():
@@ -79,26 +70,20 @@ def registrar():
 def data():
     return render_template("registro.html")
 
-@app.route("/guardardatos")
-def resdatos():
-    return guardardatos()
-
-  def guardardatos():
+@app.route("/guardardatos", methods=["POST"])  # Asegúrate de que sea POST
+def guardardatos():
     try:
-        # Verificar que la conexión esté activa
-        if not con.is_connected():
-            con.reconnect()
-
+        con = get_db_connection()  # Abre la conexión aquí
         # Obtener los datos del formulario
-        id = request.form["txtid"]
-        nombre = request.form["txtnombre"]
+        id_usuario = request.form["txtid"]
+        nombre_usuario = request.form["txtnombre"]
         contra = request.form["txtpass1"]
 
         cursor = con.cursor()
 
         # Inserción en la base de datos
         sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
-        val = (id, nombre, contra)
+        val = (id_usuario, nombre_usuario, contra)
         cursor.execute(sql, val)
         con.commit()
 
@@ -112,8 +97,8 @@ def resdatos():
         )
         
         pusher_client.trigger("registro", "nuevo", {
-            "ID": id,
-            "nombre": nombre,
+            "ID": id_usuario,
+            "nombre": nombre_usuario,
             "contraseña": contra
         })
 
@@ -124,6 +109,9 @@ def resdatos():
         print(f"Error al guardar la encuesta: {err}")
         return jsonify({"success": False, "message": f"Error al guardar la encuesta: {err}"}), 500
 
+    finally:
+        cursor.close()  # Asegúrate de cerrar el cursor
+        con.close()     # Y también la conexión
 
 if __name__ == "__main__":
     app.run(debug=True)
