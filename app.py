@@ -14,9 +14,9 @@ def get_db_connection():
         password="dJ0CIAFF="
     )
 
-@app.route("/")
+@app.route("/contenido")
 def index():
-    return render_template("app.html")
+    return render_template("contenido.html")
 
 @app.route("/alumnos")
 def alumnos():
