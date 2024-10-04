@@ -38,33 +38,33 @@ def buscar():
     con.close()
     return registros 
 
-@app.route("/registrar", methods=["GET"])
-def registrar():
-    args = request.args
+# @app.route("/registrar", methods=["GET"])
+# def registrar():
+#     args = request.args
 
-    if "temperatura" not in args or "humedad" not in args:
-        return "Faltan parámetros", 400
+#     if "temperatura" not in args or "humedad" not in args:
+#         return "Faltan parámetros", 400
 
-    con = get_db_connection()
-    cursor = con.cursor()
+#     con = get_db_connection()
+#     cursor = con.cursor()
 
-    sql = "INSERT INTO sensor_log (Temperatura, Humedad, Fecha_Hora) VALUES (%s, %s, %s)"
-    val = (args["temperatura"], args["humedad"], datetime.datetime.now(pytz.timezone("America/Matamoros")))
-    cursor.execute(sql, val)
-    con.commit()
-    cursor.close()
-    con.close()
+#     sql = "INSERT INTO sensor_log (Temperatura, Humedad, Fecha_Hora) VALUES (%s, %s, %s)"
+#     val = (args["temperatura"], args["humedad"], datetime.datetime.now(pytz.timezone("America/Matamoros")))
+#     cursor.execute(sql, val)
+#     con.commit()
+#     cursor.close()
+#     con.close()
 
-    pusher_client = pusher.Pusher(
-        app_id="1766042",
-        key="b4444a8caff165daf46a",
-        secret="1442ec24356a6e4ac6ce",
-        cluster="eu",
-        ssl=True
-    )
+#     pusher_client = pusher.Pusher(
+#         app_id="1766042",
+#         key="b4444a8caff165daf46a",
+#         secret="1442ec24356a6e4ac6ce",
+#         cluster="eu",
+#         ssl=True
+#     )
     
-    pusher_client.trigger("canalRegistrosTemperaturaHumedad", "registroTemperaturaHumedad", args)
-    return args
+#     pusher_client.trigger("canalRegistrosTemperaturaHumedad", "registroTemperaturaHumedad", args)
+#     return args
 
 @app.route("/")
 def data():
