@@ -13,26 +13,12 @@ def get_db_connection():
         user="u760464709_tst_sep_usr",
         password="dJ0CIAFF="
     )
-def Eventopusher():
-pusher_client = pusher.Pusher(
-            app_id="1766042",
-            key="b4444a8caff165daf46a",
-            secret="1442ec24356a6e4ac6ce",
-            cluster="eu",
-            ssl=True
-        )
-        
-        pusher_client.trigger("registro", "nuevo", args)
-
+    
  # pusher_client.trigger("registro", "nuevo", {
  #            "ID": id_usuario,
  #            "nombre": nombre_usuario,
  #            "contraseña": contra
  #        })
-
-@app.route("/contenido")
-def index():
-    return render_template("contenido.html")
 
 @app.route("/buscar")
 def buscar():
@@ -48,26 +34,36 @@ def buscar():
 def data():
     return render_template("registro.html")
 
+def Eventopusher():
+pusher_client = pusher.Pusher(
+            app_id="1766042",
+            key="b4444a8caff165daf46a",
+            secret="1442ec24356a6e4ac6ce",
+            cluster="eu",
+            ssl=True
+        )
+        
+        pusher_client.trigger("registro", "nuevo", args)
+
 @app.route("/guardardatos", methods=["POST"])  # Asegúrate de que sea POST
 def guardardatos():
     try:
         con = get_db_connection()  # Abre la conexión aquí
         # Obtener los datos del formulario
-        id_usuario = request.form["txtid"]
-        nombre_usuario = request.form["txtnombre"]
+        id = request.form["txtid"]
+        nombre = request.form["txtnombre"]
         contra = request.form["txtpass1"]
 
         cursor = con.cursor()
 
         # Inserción en la base de datos
         sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
-        val = (id_usuario, nombre_usuario, contra)
+        val = (id, nombre, contra)
         cursor.execute(sql, val)
         con.commit()
 
-        # Disparar el evento con Pusher para actualizar en tiempo real
         Eventopusher()
-        # Devolver una respuesta JSON de éxito
+
         return make_response(jsonify({"success": True, "message": "Encuesta guardada exitosamente!"}))
 
     except mysql.connector.Error as err:
