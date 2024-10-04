@@ -4,243 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de usuarios</title>
-  
-  <label><h2>Nombre del alumno:</h2> Rosendo Jesús González Espinoza</label>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<body>
+    <div class="container mt-4">
+        <h2>Nombre del alumno: Rosendo Jesús González Espinoza</h2>
+        <hr>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-
-<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    
-<body> <br> <hr><br>
-    <h1>
-        <form accion="/guardardatos" method="POST" class="" id="formR"><fieldset>
-            
+        <form action="/guardardatos" method="POST" id="formR">
+            <fieldset>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputnumber">ID</label>
-                    <input type="number" class="form-control" id="txtid" name="txtid" placeholder="ID del usuario" required>
-                  </div>
-
-                  <div class="form-group col-md-6">
-                    <label for="inputname">Nombre</label>
-                    <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Introduzca su nombre" required>
-                  </div>
-                
-                  <div class="form-group col-md-6">
-                    <label for="inputPassword1">Contraseña</label>
-                    <input type="password" class="form-control" id="txtpass1" name="txtpass1" placeholder="Introduzca la contraseña" required>
-                  </div>
+                    <div class="form-group col-md-6">
+                        <label for="txtid">ID</label>
+                        <input type="number" class="form-control" id="txtid" name="txtid" placeholder="ID del usuario" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="txtnombre">Nombre</label>
+                        <input type="text" class="form-control" id="txtnombre" name="txtnombre" placeholder="Introduzca su nombre" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="txtpass1">Contraseña</label>
+                        <input type="password" class="form-control" id="txtpass1" name="txtpass1" placeholder="Introduzca la contraseña" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="txtpass2">Verificación</label>
+                        <input type="password" class="form-control" id="txtpass2" name="txtpass2" placeholder="Verifique la contraseña" required>
+                    </div>
                 </div>
-                
-                <div class="form-group col-md-6">
-                  <label for="inputpassword2">Verificación</label>
-                  <input type="password" class="form-control" id="txtpass2" name= "txtpass2" placeholder="Verifique la contraseña" required>
-                </div>                 
                 <button type="submit" class="btn btn-primary">Registrar</button>
-               
-        </fieldset></form>
-    </h1><br>
-    <hr>
+            </fieldset>
+        </form>
+        <hr>
 
-<h4>
-    
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col"># ID</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Contraseña</th>
-            <th scope="col">Accion</th>
-          </tr>
-        </thead>
-        <tbody id="tbodyc"></tbody>         
-    </table>
+        <h4>Registros</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"># ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Contraseña</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyc"></tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
     <script>
-        window.addEventListener("load", function (event) {
+        $(document).ready(function() {
             function buscar() {
-                $.get("/buscar", function (respuesta) {
-                    console.log(respuesta)
+                $.get("/buscar", function(respuesta) {
+                    $("#tbodyc").html("");
+                    respuesta.forEach(function(contenido) {
+                        $("#tbodyc").append(`
+                            <tr>
+                                <td>${contenido[0]}</td>
+                                <td>${contenido[1]}</td>
+                                <td>${contenido[2]}</td>
+                                <td>
+                                    <input type="button" value="Eliminar" class="btn btn-danger btn-eliminar" data-id="${contenido[0]}">
+                                    <input type="button" value="Modificar" class="btn btn-primary btn-modificar" data-id="${contenido[0]}">
+                                </td>
+                            </tr>
+                        `);
+                    });
+                });
+            }
+            buscar();
 
-                    $("#tbodyc").html("")
+            $(document).on("click", ".btn-eliminar", function() {
+                if (confirm("¿Quieres eliminar este registro?")) {
+                    var id = $(this).data("id");
+                    $.post("/eliminar", { id: id });
+                }
+            });
 
-                    for (var x in respuesta) {
-                        var contenido = respuesta[x]
-                        $("#tbodyc").append(`<tr>
-                            <td>${contenido[0]}</td>
-                            <td>${contenido[1]}</td>
-                            <td>${contenido[2]}</td>
-                            <td><input type="button"  value="Eliminar" class="btn btn-danger btn-eliminar" data-id="${obtenerId["id_Usuario"]">
-                            <input type="button" value="Modificar" class="btn btn-primary btn-modificar" data-id="${obtenerId["id_Usuario"]></td>
-                        </tr>`)
+            var pusher = new Pusher("2df86616075904231311", { cluster: "eu" });
+            var channel = pusher.subscribe("canalcontenido");
+            channel.bind("canalcontenido", function() {
+                alert("Ocurrió el evento");
+                buscar();
+            });
+
+            // Validación del formulario
+            $.validator.addMethod("usuarioValido", function(value) {
+                return /^[A-Za-z0-9]+$/.test(value) && value.length >= 5 && value.length <= 20;
+            }, "El nombre de usuario solo puede contener letras y números, sin espacios ni caracteres especiales.");
+
+            $.validator.addMethod("igualPassword", function(value) {
+                return value === $("#txtpass1").val();
+            }, "Las contraseñas deben coincidir.");
+
+            $("#formR").validate({
+                rules: {
+                    txtid: { required: true },
+                    txtnombre: { required: true, usuarioValido: true, minlength: 5, maxlength: 20 },
+                    txtpass1: { required: true, minlength: 8, maxlength: 20 },
+                    txtpass2: { required: true, igualPassword: true }
+                },
+                messages: {
+                    txtid: { required: "Por favor, introduce un ID de experiencia." },
+                    txtnombre: { required: "Por favor, introduce tu nombre y apellido.", minlength: "Debes introducir al menos 5 caracteres.", maxlength: "No puedes exceder los 20 caracteres." },
+                    txtpass1: { required: "Por favor, introduce la contraseña", minlength: "Debes introducir al menos 8 caracteres.", maxlength: "No puedes exceder los 20 caracteres." },
+                    txtpass2: { required: "Favor de introducir la confirmación de la contraseña." }
+                }
+            });
+
+            $("#formR").submit(function(event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                fetch('/guardardatos', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log(data.message);
+                        buscar(); // Actualiza la tabla después de registrar
+                    } else {
+                        console.error(data.message);
                     }
                 })
-            }
-            buscar()
-            
-                        
-            $(document).on("click", ".btn-eliminar", function (event) {
-                if (!confirm("¿Quieres eliminar este registro?")) {
-                    return
-                }
-                var id = $(this).attr("data-id")
-
-                $.post("/eliminar", {id: id})
-            })
-            
-            // Enable pusher logging - don't include this in production
-            Pusher.logToConsole = true
-            
-            var pusher = new Pusher("2df86616075904231311", {
-                cluster: "eu"
-            })
-
-            //                            Canal
-            var channel = pusher.subscribe("canalcontenido");
-            //           Evento
-            channel.bind("canalcontenido", function (mostrarcontenido) {
-                alert("Ocurrió el evento")
-                console.log(mostrarcontenido)
-                
-                buscar()
-            })
-        })
-
-         // $(document).on("click", ".btn-modificar", function (event) {
-         //        var id = $(this).attr("data-id")
-
-         //        $.get("/editar", {id: id}, function (respuesta) {
-         //            console.log(respuesta)
-         //            var id_valor = respuesta[0]
-
-         //            $("#id")
-         //            .val(obtenerId["id_Usuario"])
-         //            .trigger("focus")
-
-         //            $("#temperatura").val(temperaturaHumedad["Temperatura"])
-         //            $("#humedad").val(temperaturaHumedad["Humedad"])
-         //        })
-         //    })
+                .catch(error => console.error("Error:", error));
+            });
+        });
     </script>
-</h4>
-
-    
-    
-    <script>
-        // Validación del formulario con jQuery
-       $(document).ready(function() {
-    // Añadir el método de validación para el nombre de usuario
-    $.validator.addMethod("usuarioValido", function(value, element) {
-        // Verificar que no esté vacío
-        if (!value) return false;
-        
-        // Verificar longitud
-        if (value.length < 5 || value.length > 20) return false;
-        
-        // Verificar caracteres permitidos (letras y números)
-        const regex = /^[A-Za-z0-9]+$/;
-        return regex.test(value);
-    }, "El nombre de usuario solo puede contener letras y números, sin espacios ni caracteres especiales.");
-
- $.validator.addMethod("igualPassword", function(value, element) {
-        return value === $("#txtpass1").val();
-    }, "Las contraseñas deben coincidir.");
-
-           
-    $("#formR").validate({
-        rules: {
-            txtid: {
-                required: true
-            },
-            txtnombre: {
-                required: true,
-                usuarioValido: true, 
-                minlength: 5,
-                maxlength: 20
-            },
-            txtpass1: {
-                required: true,
-                minlength: 8,
-                maxlength: 20
-            },
-            txtpass2: {
-                required: true,
-            }
-        },
-        messages: {
-            txtid: {
-                required: "Por favor, introduce un ID de experiencia."
-            },
-            txtnombre: {
-                required: "Por favor, introduce tu nombre y apellido.",
-                minlength: "Debes introducir al menos 5 caracteres.",
-                maxlength: "No puedes exceder los 20 caracteres."
-            },
-            txtpass1: {
-                required: "Por favor, introduce la contraseña",
-                minlength: "Debes introducir al menos 8 caracteres.",
-                maxlength: "No puedes exceder los 20 caracteres."
-            },
-            txtpass2: {
-                required: "Favor de introducir la confirmación de la contraseña.",
-            }
-        }
-    });
-});
-
-
-window.addEventListener("load", function (event) {
-        Pusher.logToConsole = true;
-
-        var pusher = new Pusher("2df86616075904231311", {
-            cluster: "us2"
-        });
-
-        var channel = pusher.subscribe("registro");
-
-        channel.bind("nuevo", function (registro) {
-        });
-
-        // Enviar el formulario mediante AJAX
-        $("#formR").submit(function (event) {
-            event.preventDefault();  // Evita el envío tradicional del formulario
-            
-        var id = $("#txtid").val();  // Asumiendo que el campo tiene id="txtid"
-        var nombre = $("#txtnombre").val();  // Asumiendo que el campo tiene id="txtnombre"
-        var password = $("#txtpass1").val(); 
-        var formData = $(this).serialize();  // Serializa los datos del formulario
-
-           fetch('/guardardatos', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams({
-        'txtid': id,
-        'txtnombre': nombre,
-        'txtpass1': password
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Manejar la respuesta del servidor
-            if (data.success) {
-                console.log(data.message);
-            } else {
-                console.error(data.message);
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
-    });
-});
-    </script>
-    
 </body>
 </html>
