@@ -54,6 +54,59 @@
     </h1><br>
     <hr>
 
+<h1>
+    
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"># ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Contraseña</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyc"></tbody>         
+    </table>
+
+    <script>
+        window.addEventListener("load", function (event) {
+            function buscar() {
+                $.get("/buscar", function (respuesta) {
+                    console.log(respuesta)
+
+                    $("#tbodyc").html("")
+
+                    for (var x in respuesta) {
+                        var contenido = respuesta[x]
+                        $("#tbodyc").append(`<tr>
+                            <td>${contenido[0]}</td>
+                            <td>${contenido[1]}</td>
+                            <td>${contenido[2]}</td>
+                        </tr>`)
+                    }
+                })
+            }
+            buscar()
+
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true
+            
+            var pusher = new Pusher("2df86616075904231311", {
+                cluster: "eu"
+            })
+
+            //                            Canal
+            var channel = pusher.subscribe("canalcontenido");
+            //           Evento
+            channel.bind("canalcontenido", function (mostrarcontenido) {
+                alert("Ocurrió el evento")
+                console.log(mostrarcontenido)
+                
+                buscar()
+            })
+        })
+    </script>
+    
+</body>
     <script>
         // Validación del formulario con jQuery
        $(document).ready(function() {
