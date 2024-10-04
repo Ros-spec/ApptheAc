@@ -22,13 +22,14 @@ pusher_client = pusher.Pusher(
             ssl=True
         )
         
-        pusher_client.trigger("registro", "nuevo", {
-            "ID": id_usuario,
-            "nombre": nombre_usuario,
-            "contraseña": contra
-        })
+        pusher_client.trigger("registro", "nuevo", args)
 
-    
+ # pusher_client.trigger("registro", "nuevo", {
+ #            "ID": id_usuario,
+ #            "nombre": nombre_usuario,
+ #            "contraseña": contra
+ #        })
+
 @app.route("/contenido")
 def index():
     return render_template("contenido.html")
