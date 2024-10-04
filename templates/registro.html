@@ -40,14 +40,7 @@
                 <div class="form-group col-md-6">
                   <label for="inputpassword2">Verificación</label>
                   <input type="password" class="form-control" id="txtpass2" name= "txtpass2" placeholder="Verifique la contraseña" required>
-                </div>
-                <div class="form-row">
-                 
-                  
-                </div>
-                <div class="form-group">
-                  
-                </div>
+                </div>                 
                 <button type="submit" class="btn btn-primary">Registrar</button>
                
         </fieldset></form>
@@ -62,6 +55,7 @@
             <th scope="col"># ID</th>
             <th scope="col">Nombre</th>
             <th scope="col">Contraseña</th>
+            <th scope="col">Accion</th>
           </tr>
         </thead>
         <tbody id="tbodyc"></tbody>         
@@ -81,6 +75,8 @@
                             <td>${contenido[0]}</td>
                             <td>${contenido[1]}</td>
                             <td>${contenido[2]}</td>
+                            <td><input type="button" name="Btneliminar" id="Btneliminar" value="Eliminar"></td>
+                            <td><input type="button" name="Btnmodificar" id="Btnmodificar" value="Modificar"></td>
                         </tr>`)
                     }
                 })
