@@ -29,62 +29,61 @@ def data():
     return render_template("registro.html")
      
 def Eventopusher():
-pusher_client = pusher.Pusher(
-            app_id="1766042",
-            key="b4444a8caff165daf46a",
-            secret="1442ec24356a6e4ac6ce",
-            cluster="eu",
-            ssl=True
-        )
+    pusher_client = pusher.Pusher(
+        app_id="1766042",
+        key="b4444a8caff165daf46a",
+        secret="1442ec24356a6e4ac6ce",
+        cluster="eu",
+        ssl=True
+    )
 
-        id = request.form["txtid"]
-        nombre = request.form["txtnombre"]
-        contra = request.form["txtpass1"]
+    id = request.form["txtid"]
+    nombre = request.form["txtnombre"]
+    contra = request.form["txtpass1"]
 
-        pusher_client.trigger("registro", "nuevo", {
-            "ID": id,
-            "nombre": nombre,
-            "contraseña": contra
-        })
+    pusher_client.trigger("registro", "nuevo", {
+        "ID": id,
+        "nombre": nombre,
+        "contraseña": contra
+    })
 
 @app.route("/modificar", methods=["GET"])
 def editar():
-    if not con.is_connected():
-        con.reconnect()
+    con = get_db_connection()  # Abre la conexión aquí
 
     id = request.args["id"]
 
     cursor = con.cursor(dictionary=True)
-    sql    = """
+    sql = """
     SELECT Id_Usuario, Nombre_Usuario, contrasena FROM tst0_usuarios
     WHERE Id_Usuario = %s
     """
-    val    = (id,)
+    val = (id,)
 
     cursor.execute(sql, val)
     registros = cursor.fetchall()
+    cursor.close()
     con.close()
 
     return make_response(jsonify(registros))
 
 @app.route("/eliminar", methods=["POST"])
 def eliminar():
-    if not con.is_connected():
-        con.reconnect()
+    con = get_db_connection()  # Abre la conexión aquí
 
     id = request.form["txtid"]
     
-    
     cursor = con.cursor(dictionary=True)
-    sql    = """
-    DELETE FROM tst0_uuarios
-    WHERE Id_Usuarios = %s
+    sql = """
+    DELETE FROM tst0_usuarios
+    WHERE Id_Usuario = %s
     """
-    val    = (id,)
+    val = (id,)
 
     cursor.execute(sql, val)
     con.commit()
-    con.close()
+    cursor.close()  # Asegúrate de cerrar el cursor
+    con.close()     # Y también la conexión
 
     Eventopusher()
 
@@ -99,7 +98,6 @@ def guardardatos():
         nombre = request.form["txtnombre"]
         contra = request.form["txtpass1"]
 
-        
         cursor = con.cursor()
 
         # Inserción en la base de datos
