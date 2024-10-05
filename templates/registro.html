@@ -96,14 +96,14 @@
             $(document).on("click", ".btn-eliminar", function() {
                 if (confirm("¿Quieres eliminar este registro?")) {
                     var id = $(this).data("id");
-                    $.post("/eliminar", { id: id });
+                    $.get("/eliminar", { id: id });
                 }
             });
 
             var pusher = new Pusher("2df86616075904231311", { cluster: "eu" });
             var channel = pusher.subscribe("canalcontenido");
             channel.bind("canalcontenido", function() {
-                alert("Ocurrió el evento");
+                alert("Funciona !!");
                 buscar();
             });
 
