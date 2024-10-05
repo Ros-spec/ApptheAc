@@ -47,6 +47,26 @@ pusher_client = pusher.Pusher(
             "contraseña": contra
         })
 
+@app.route("/modificar", methods=["GET"])
+def editar():
+    if not con.is_connected():
+        con.reconnect()
+
+    id = request.args["id"]
+
+    cursor = con.cursor(dictionary=True)
+    sql    = """
+    SELECT Id_Usuario, Nombre_Usuario, contrasena FROM tst0_usuarios
+    WHERE Id_Usuario = %s
+    """
+    val    = (id,)
+
+    cursor.execute(sql, val)
+    registros = cursor.fetchall()
+    con.close()
+
+    return make_response(jsonify(registros))
+
 @app.route("/eliminar", methods=["POST"])
 def eliminar(id):
     if not con.is_connected():
