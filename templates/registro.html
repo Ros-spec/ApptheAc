@@ -77,7 +77,22 @@
                 });
             }
             buscar();
+             $(document).on("click", ".btn-modificar", function (event) {
+                var id = $(this).attr("data-id")
 
+                $.get("/modificar", {id: id}, function (respuesta) {
+                    console.log(respuesta)
+                    var contenido = respuesta[0]
+
+                    $("#id")
+                    .val(contenido["Id_Usuario"])
+                    .trigger("focus")
+
+                    $("#txtnombre").val(contenido["Nombre_Usuario"])
+                    $("#txtpass1").val(contenido["contrasena"])
+                })
+            })
+            
             $(document).on("click", ".btn-eliminar", function() {
                 if (confirm("¿Quieres eliminar este registro?")) {
                     var id = $(this).data("id");
