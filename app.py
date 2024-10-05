@@ -27,12 +27,8 @@ def buscar():
 @app.route("/")
 def data():
     return render_template("registro.html")
-    
-        id = request.form["txtid"]
-        nombre = request.form["txtnombre"]
-        contra = request.form["txtpass1"]
-
-def Eventopusher(id, nombre, contra):
+     
+def Eventopusher():
 pusher_client = pusher.Pusher(
             app_id="1766042",
             key="b4444a8caff165daf46a",
@@ -40,10 +36,14 @@ pusher_client = pusher.Pusher(
             cluster="eu",
             ssl=True
         )
-        
+
+        id = request.form["txtid"]
+        nombre = request.form["txtnombre"]
+        contra = request.form["txtpass1"]
+
         pusher_client.trigger("registro", "nuevo", {
-            "ID": id_usuario,
-            "nombre": nombre_usuario,
+            "ID": id,
+            "nombre": nombre,
             "contraseña": contra
         })
 
@@ -68,10 +68,13 @@ def editar():
     return make_response(jsonify(registros))
 
 @app.route("/eliminar", methods=["POST"])
-def eliminar(id):
+def eliminar():
     if not con.is_connected():
         con.reconnect()
-        
+
+    id = request.form["txtid"]
+    
+    
     cursor = con.cursor(dictionary=True)
     sql    = """
     DELETE FROM tst0_uuarios
@@ -88,11 +91,15 @@ def eliminar(id):
     return make_response(jsonify({}))
 
 @app.route("/guardardatos", methods=["POST"])  # Asegúrate de que sea POST
-def guardardatos(id, nombre, contra):
+def guardardatos():
     try:
         con = get_db_connection()  # Abre la conexión aquí
         # Obtener los datos del formulario
+        id = request.form["txtid"]
+        nombre = request.form["txtnombre"]
+        contra = request.form["txtpass1"]
 
+        
         cursor = con.cursor()
 
         # Inserción en la base de datos
