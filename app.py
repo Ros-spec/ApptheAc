@@ -48,12 +48,10 @@ pusher_client = pusher.Pusher(
         })
 
 @app.route("/eliminar", methods=["POST"])
-def eliminar():
+def eliminar(id):
     if not con.is_connected():
         con.reconnect()
-
-    id = request.form["txtid"]
-
+        
     cursor = con.cursor(dictionary=True)
     sql    = """
     DELETE FROM tst0_uuarios
