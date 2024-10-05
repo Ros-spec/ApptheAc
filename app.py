@@ -34,7 +34,9 @@ def buscar():
 def data():
     return render_template("registro.html")
 
-def Eventopusher():
+args = request.args()
+
+def Eventopusher(args):
 pusher_client = pusher.Pusher(
             app_id="1766042",
             key="b4444a8caff165daf46a",
