@@ -67,11 +67,11 @@ def editar():
 
     return make_response(jsonify(registros))
 
-@app.route("/eliminar", methods=["POST"])
+@app.route("/eliminar", methods=["GET"])
 def eliminar():
     con = get_db_connection()  # Abre la conexión aquí
 
-    id = request.form["txtid"]
+    id = request.args["id"]
     
     cursor = con.cursor(dictionary=True)
     sql = """
