@@ -84,7 +84,7 @@
                     console.log(respuesta)
                     var contenido = respuesta[0]
 
-                    $("#id")
+                    $("#txtid")
                     .val(contenido["Id_Usuario"])
                     .trigger("focus")
 
@@ -95,7 +95,7 @@
             
             $(document).on("click", ".btn-eliminar", function() {
                 if (confirm("¿Quieres eliminar este registro?")) {
-                    var id = $(this).data("id");
+                    var id = $(this).data("data-id");
                     $.get("/eliminar", { id: id });
                 }
             });
