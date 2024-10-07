@@ -101,11 +101,14 @@ def guardardatos():
         cursor = con.cursor()
 
     if id:
-        sql = "UPDATE tst0_usuarios SET Nombre_Usuario = %s, Contrasena = %s WHERE Id_Usuario = %s"
-        val = (nombre, contra, id)
-    else:
+    sql = " UPDATE tst0_usuarios SET Nombre_Usuario = %s, Contrasena     = %s WHERE Id_Usuario = %s"
+    val = (nombre, contra, id)
+else:
+    if nombre and contra:  
         sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
         val = (id, nombre, contra)
+
+
         
         # Inserción en la base de datos
         cursor.execute(sql, val)
