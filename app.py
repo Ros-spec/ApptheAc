@@ -24,9 +24,6 @@ def buscar():
     con.close()
     return registros 
 
-    if __name__ == "__main__":
-    app.run(debug=True)
-
 @app.route("/")
 def data():
     return render_template("registro.html")
@@ -119,4 +116,8 @@ finally:
 @app.route("/guardardatos", methods=["POST"])  
 def guardardatos():
  save()
+
+
+    if __name__ == "__main__":
+    app.run(debug=True)
 
