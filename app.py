@@ -14,9 +14,6 @@ def get_db_connection():
         password="dJ0CIAFF="
     )
     
-    if __name__ == "__main__":
-    app.run(debug=True)
-
 @app.route("/buscar")
 def buscar():
     con = get_db_connection()
@@ -26,7 +23,10 @@ def buscar():
     cursor.close()
     con.close()
     return registros 
-    
+
+    if __name__ == "__main__":
+    app.run(debug=True)
+
 @app.route("/")
 def data():
     return render_template("registro.html")
