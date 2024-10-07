@@ -91,40 +91,37 @@ def eliminar():
 
 @app.route("/guardardatos", methods=["POST"])  # Asegúrate de que sea POST
 def guardardatos():
-    try:
-        con = get_db_connection()  # Abre la conexión aquí
-        # Obtener los datos del formulario
-        id = request.form["txtid"]
-        nombre = request.form["txtnombre"]
-        contra = request.form["txtpass1"]
+ try:
+    con = get_db_connection()  # Abre la conexión aquí
+    # Obtener los datos del formulario
+    id = request.form["txtid"]
+    nombre = request.form["txtnombre"]
+    contra = request.form["txtpass1"]
 
-        cursor = con.cursor()
+    cursor = con.cursor()
 
     if id:
-    sql = " UPDATE tst0_usuarios SET Nombre_Usuario = %s, Contrasena     = %s WHERE Id_Usuario = %s"
-    val = (nombre, contra, id)
-else:
-    if nombre and contra:  
-        sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
-        val = (id, nombre, contra)
+        sql = "UPDATE tst0_usuarios SET Nombre_Usuario = %s, Contrasena = %s WHERE Id_Usuario = %s"
+        val = (nombre, contra, id)
+    else:
+        if nombre and contra:  
+            sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
+            val = (id, nombre, contra)
 
+    cursor.execute(sql, val)
+    con.commit()
 
-        
-        # Inserción en la base de datos
-        cursor.execute(sql, val)
-        con.commit()
+    Eventopusher()
 
-        Eventopusher()
+    return make_response(jsonify({"success": True, "message": "Encuesta guardada exitosamente!"}))
 
-        return make_response(jsonify({"success": True, "message": "Encuesta guardada exitosamente!"}))
+except mysql.connector.Error as err:
+    print(f"Error al guardar la encuesta: {err}")
+    return jsonify({"success": False, "message": f"Error al guardar la encuesta: {err}"}), 500
 
-    except mysql.connector.Error as err:
-        print(f"Error al guardar la encuesta: {err}")
-        return jsonify({"success": False, "message": f"Error al guardar la encuesta: {err}"}), 500
-
-    finally:
-        cursor.close()  # Asegúrate de cerrar el cursor
-        con.close()     # Y también la conexión
+finally:
+    cursor.close()  # Asegúrate de cerrar el cursor
+    con.close()     # Y también la conexión # Y también la conexión
 
 if __name__ == "__main__":
     app.run(debug=True)
