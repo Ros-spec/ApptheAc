@@ -51,7 +51,7 @@ def Eventopusher():
 def editar():
     con = get_db_connection()  # Abre la conexión aquí
 
-    id = request.args["Id_Usuario"]
+    id = request.args["id"]
 
     cursor = con.cursor(dictionary=True)
     sql = """
@@ -71,7 +71,7 @@ def editar():
 def eliminar():
     con = get_db_connection()  # Abre la conexión aquí
 
-    id = request.args["Id_Usuario"]
+    id = request.args["id"]
     
     cursor = con.cursor(dictionary=True)
     sql = """
