@@ -90,7 +90,6 @@ def eliminar():
     return make_response(jsonify({}))
 
 def save():
-    try:
     con = get_db_connection() 
     
     id = request.form["txtid"]
@@ -108,7 +107,6 @@ def save():
     Eventopusher()
     return make_response(jsonify({"success": True, "message": "Encuesta guardada exitosamente!"}))
 
-finally:
     cursor.close() 
     con.close()     
 
