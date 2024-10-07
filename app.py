@@ -14,6 +14,9 @@ def get_db_connection():
         password="dJ0CIAFF="
     )
     
+    if __name__ == "__main__":
+    app.run(debug=True)
+
 @app.route("/buscar")
 def buscar():
     con = get_db_connection()
@@ -89,34 +92,31 @@ def eliminar():
 
     return make_response(jsonify({}))
 
-@app.route("/guardardatos", methods=["POST"])  # Asegúrate de que sea POST
-def guardardatos():
- try:
-    con = get_db_connection()  # Abre la conexión aquí
-    # Obtener los datos del formulario
+def save():
+    try:
+    con = get_db_connection() 
+    
     id = request.form["txtid"]
     nombre = request.form["txtnombre"]
     contra = request.form["txtpass1"]
 
     cursor = con.cursor()
 
-            sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
-            val = (id, nombre, contra)
+    sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
+    val = (id, nombre, contra)
 
     cursor.execute(sql, val)
     con.commit()
 
     Eventopusher()
-
     return make_response(jsonify({"success": True, "message": "Encuesta guardada exitosamente!"}))
 
-except mysql.connector.Error as err:
-    print(f"Error al guardar la encuesta: {err}")
-    return jsonify({"success": False, "message": f"Error al guardar la encuesta: {err}"}), 500
-
 finally:
-    cursor.close()  # Asegúrate de cerrar el cursor
-    con.close()     # Y también la conexión # Y también la conexión
+    cursor.close() 
+    con.close()     
 
-if __name__ == "__main__":
-    app.run(debug=True)
+
+@app.route("/guardardatos", methods=["POST"])  
+def guardardatos():
+ save()
+
