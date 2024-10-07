@@ -100,7 +100,7 @@ def guardardatos():
 
         cursor = con.cursor()
 
-         if id:
+    if id:
         sql = """ 
         UPDATE tst0_usuarios SET
         Nombre_Usuario = %s,
