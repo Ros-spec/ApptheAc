@@ -39,8 +39,12 @@
                     $.get("/", function (respuesta) {     
                     if(respuesta.method === "GET") {} else {
                         button = '<button type="submit" class="btn btn-primary">Registrar</button>'
-                    } 
-                    $.get("/", function (respuesta) {     
+                    }
+                        const container = document.getElementById("button");
+                        container.innerHTML = button;
+                    }); 
+                   
+                 $.get("/", function (respuesta) {     
                      if(respuesta.method === "POST") {} else {
                         button = '<button type="submit" class="btn btn-primary">Modificar</button>'
                     } 
