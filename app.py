@@ -115,7 +115,7 @@ def save():
 def guardardatos():
  save()
 
-return
+return make_response(jsonify({"success": True, "message": "exito"}))
 
     if __name__ == "__main__":
     app.run(debug=True)
