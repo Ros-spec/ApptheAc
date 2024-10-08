@@ -34,18 +34,16 @@
                     </div>
                 </div> <br><br> <div id="button"></div>
              <script>
-                 let button = ""
                  
                     $.get("/", function (respuesta) {     
+                    let button = ""
                     if(respuesta.method === "GET") {} else {
                         button = '<button type="submit" class="btn btn-primary">Registrar</button>'
                     }
                         const container = document.getElementById("button");
                         container.innerHTML = button;
-                    }); 
- 
-                    
                     });
+                 
              </script>
             </fieldset>
         </form>
