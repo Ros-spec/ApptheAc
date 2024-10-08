@@ -35,14 +35,15 @@
                 </div> <br><br> <div id="button"></div>
              <script>
                  let button = ""
-
+                 
                     $.get("/", function (respuesta) {     
-                    if(respuesta.method === "GET") {
-                        button = '<button type="submit" class="btn btn-primary">Modificar</button>'
-                    } else {
+                    if(respuesta.method === "GET") {} else {
                         button = '<button type="submit" class="btn btn-primary">Registrar</button>'
                     } 
-
+                    $.get("/", function (respuesta) {     
+                     if(respuesta.method === "POST") {} else {
+                        button = '<button type="submit" class="btn btn-primary">Modificar</button>'
+                    } 
                     const container = document.getElementById("button");
                     container.innerHTML = button;
                     
