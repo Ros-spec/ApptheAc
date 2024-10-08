@@ -44,7 +44,7 @@
                         container.innerHTML = button;
                     }); 
                    
-                 $.get("/", function (respuesta) {     
+                 $.get("/modificar", function (respuesta) {     
                      if(respuesta.method === "POST") {} else {
                         button = '<button type="submit" class="btn btn-primary">Modificar</button>'
                     } 
