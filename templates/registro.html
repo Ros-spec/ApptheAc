@@ -34,11 +34,8 @@
                 </div> <br><br> <div id="button"></div>
              <script>
                  let button = ""
-                 var id = $(this).attr("data-id")
 
-                    $.get("/modificar", {id: id}, function (respuesta) {
-                    
-                    if(id === ""){
+                    $.get("/", function (respuesta) {                    
                         button = '<button type="submit" class="btn btn-primary">Registrar</button>'
                     } else {
                         button = '<button type="submit" class="btn btn-primary">Modificar</button>'
@@ -47,9 +44,7 @@
                     const container = document.getElementById("button");
                     container.innerHTML = button;
                     
-                    buscar();
-                    })
-                })    
+                    });
              </script>
             </fieldset>
         </form>
