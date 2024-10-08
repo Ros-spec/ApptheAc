@@ -34,15 +34,14 @@
                 </div> <br><br> <div id="button"></div>
              <script>
                  let button = ""
-                 
-                $(document).on("click", ".btn-modificar", function (event) {
-                var id = $(this).attr("data-id")
+                 var id = $(this).attr("data-id")
 
-                $.get("/modificar", {id: id}, function (respuesta) {
+                    $.get("/modificar", {id: id}, function (respuesta) {
+                    
                     if(id === ""){
-                        button = "<button type="submit" class="btn btn-primary">Registrar</button>"
+                        button = '<button type="submit" class="btn btn-primary">Registrar</button>'
                     } else {
-                        button = "<button type="submit" class="btn btn-primary">Modificar</button>" 
+                        button = '<button type="submit" class="btn btn-primary">Modificar</button>'
                     } 
 
                     const container = document.getElementById("button");
