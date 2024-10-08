@@ -27,7 +27,7 @@ def buscar():
 @app.route("/")
 def data():
     return render_template("registro.html")
-     
+
 def Eventopusher():
     pusher_client = pusher.Pusher(
         app_id="1766042",
@@ -49,17 +49,12 @@ def Eventopusher():
 
 @app.route("/modificar", methods=["GET"])
 def editar():
-    con = get_db_connection()  # Abre la conexión aquí
-
+    con = get_db_connection()
     id = request.args["id"]
-
     cursor = con.cursor(dictionary=True)
-    sql = """
-    SELECT Id_Usuario, Nombre_Usuario, contrasena FROM tst0_usuarios
-    WHERE Id_Usuario = %s
-    """
+    
+    sql = "SELECT Id_Usuario, Nombre_Usuario, Contrasena FROM tst0_usuarios WHERE Id_Usuario = %s"
     val = (id,)
-
     cursor.execute(sql, val)
     registros = cursor.fetchall()
     cursor.close()
@@ -69,35 +64,29 @@ def editar():
 
 @app.route("/eliminar", methods=["GET"])
 def eliminar():
-    con = get_db_connection()  # Abre la conexión aquí
-
+    con = get_db_connection()
     id = request.args["id"]
     
     cursor = con.cursor(dictionary=True)
-    sql = """
-    DELETE FROM tst0_usuarios
-    WHERE Id_Usuario = %s
-    """
+    sql = "DELETE FROM tst0_usuarios WHERE Id_Usuario = %s"
     val = (id,)
-
     cursor.execute(sql, val)
     con.commit()
-    cursor.close()  # Asegúrate de cerrar el cursor
-    con.close()     # Y también la conexión
+    cursor.close()
+    con.close()
 
-    Eventopusher()
+    # Cambié a no pasar request.form porque eliminar no tiene datos de formulario
+    Eventopusher()  # Si no se requieren datos específicos, puedes modificar esto.
 
     return make_response(jsonify({}))
 
 def save():
     con = get_db_connection() 
-    
     id = request.form["txtid"]
     nombre = request.form["txtnombre"]
     contra = request.form["txtpass1"]
 
     cursor = con.cursor()
-
     sql = "INSERT INTO tst0_usuarios (Id_Usuario, Nombre_Usuario, Contrasena) VALUES (%s, %s, %s)"
     val = (id, nombre, contra)
 
@@ -105,18 +94,14 @@ def save():
     con.commit()
 
     Eventopusher()
-    return make_response(jsonify({"success": True, "message": "Encuesta guardada exitosamente!"}))
 
     cursor.close() 
     con.close()     
 
-
 @app.route("/guardardatos", methods=["POST"])  
 def guardardatos():
- save()
+    save()
+    return make_response(jsonify({"success": True, "message": "Éxito"}))
 
-return make_response(jsonify({"success": True, "message": "exito"}))
-
-    if __name__ == "__main__":
+if __name__ == "__main__":
     app.run(debug=True)
-
