@@ -35,10 +35,11 @@
              <script>
                  let button = ""
 
-                    $.get("/", function (respuesta) {                    
-                        button = '<button type="submit" class="btn btn-primary">Registrar</button>'
-                    } else {
+                    $.get("/", function (respuesta) {     
+                    if(respuesta.method === "GET") {
                         button = '<button type="submit" class="btn btn-primary">Modificar</button>'
+                    } else {
+                        button = '<button type="submit" class="btn btn-primary">Registrar</button>'
                     } 
 
                     const container = document.getElementById("button");
