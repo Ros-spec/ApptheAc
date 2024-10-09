@@ -34,28 +34,19 @@
                     </div>
                 </div> <br><br> <div id="button"></div>
              <script>
-            
-        $(document).ready(function () {
-    $(".btn-modificar").on("click", function () {
-        // Alternar visibilidad de los elementos
-        $(this).toggle(); 
-        $("#txtid").toggle(); 
-        $("#lblid").toggle(); 
-
-        const id = $(this).attr("data-id"); 
-        $.get("/modificar", { id: id }, function (respuesta) {
-            let button = '';
-
-            if (respuesta.success) { 
-                button = '<button type="submit" class="btn btn-primary btn-act" id="btnAct">Actualizar</button>';
-            } else {
-                button = '<button type="submit" class="btn btn-primary" id="btnreg">Registrar</button>';
-            }
-                  
-                });
+             $(document).ready(function () {
+            $("#btnreg").on("click", function () {
+                $("#btnAct").toggle(); // Mostrar el nuevo botón al hacer clic
+                $("#txtid").toggle();
+                $("#lblid").toggle();
             });
         });
+            
+                let button = '';
 
+                //button = '<button type="submit" class="btn btn-primary btn-act" id="btnAct">Actualizar</button>';
+                button = '<button type="submit" class="btn btn-primary" id="btnreg">Registrar</button>';
+   
         const container = document.getElementById("button");
         container.innerHTML = button;         
                  
