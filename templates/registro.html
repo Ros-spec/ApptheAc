@@ -34,12 +34,8 @@
                     </div>
                 </div> <br><br> <div id="button"></div>
              <script>
-                    let button = ""
-                   
-                 $(document).on("click", ".btn-modificar", function (event) {     
-                    button = '<button type="submit" class="btn btn-primary btn-modificar">Modificar</button>'
-                 });
-                    button = '<button type="submit" class="btn btn-primary">Registrar</button>'
+                    button = '<button type="submit" class="btn btn-primary btn-modificar" id="btnmod">Modificar</button>'
+                    button = '<button type="submit" class="btn btn-primary" id ="btnreg">Registrar</button>'
                     
                     const container = document.getElementById("button");
                     container.innerHTML = button;
@@ -170,6 +166,21 @@
                 .catch(error => console.error("Error:", error));
             });
         });
+
+        $(document).ready(function () {
+            $("#btnreg").click(function () {
+                $("#btnmod").show(); // Mostrar el nuevo botón al hacer clic
+                $("#txtid").show
+            });
+        });
+        
     </script>
 </body>
 </html>
+
+ <style>
+        #txtid, #btnmod {
+            display: none; /* Ocultar el botón inicialmente */
+        }
+    </style>
+
