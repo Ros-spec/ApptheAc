@@ -34,7 +34,7 @@
                     </div>
                 </div> <br><br> <div id="button"></div>
              <script>
-                    button = '<button type="submit" class="btn btn-primary btn-modificar" id="btnmod">Modificar</button>'
+                    button = '<button type="submit" class="btn btn-primary btn-modificar" id="btnAct">Modificar</button>'
                     button = '<button type="submit" class="btn btn-primary" id ="btnreg">Registrar</button>'
                     
                     const container = document.getElementById("button");
@@ -169,7 +169,7 @@
 
         $(document).ready(function () {
             $("#btnreg").click(function () {
-                $("#btnmod").show(); // Mostrar el nuevo botón al hacer clic
+                $("#btnAct").show(); // Mostrar el nuevo botón al hacer clic
                 $("#txtid").show
             });
         });
@@ -179,7 +179,7 @@
 </html>
 
  <style>
-        #txtid, #btnmod {
+        #txtid, #btnAct {
             display: none; /* Ocultar el botón inicialmente */
         }
     </style>
