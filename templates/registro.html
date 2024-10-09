@@ -180,11 +180,11 @@
             });
         });
 
-        $(document).ready(function () {
-            $("#btnreg").on("click", function () {
-                $("#btnAct").toggle(); // Mostrar el nuevo botón al hacer clic
-                $("#txtid").toggle();
-                $("#lblid").toggle();
+         $(document).ready(function () {
+            $(".btn-modificar").on("click", function () {
+                $(this).toggle(); 
+                $("#txtid").toggle(); 
+                $("#lblid").toggle(); 
             });
         });
         
