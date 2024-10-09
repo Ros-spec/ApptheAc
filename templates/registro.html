@@ -39,16 +39,18 @@
                 $("#btnAct").toggle(); // Mostrar el nuevo botón al hacer clic
                 $("#txtid").toggle();
                 $("#lblid").toggle();
+                });
             });
-        });
             
-                let button = '';
+                let btnact = '';
+                let btnreg = '';
 
-                //button = '<button type="submit" class="btn btn-primary btn-act" id="btnAct">Actualizar</button>';
-                button = '<button type="submit" class="btn btn-primary" id="btnreg">Registrar</button>';
+                btnact = '<button type="submit" class="btn btn-primary btn-act" id="btnAct">Actualizar</button>';
+                btnreg = '<button type="submit" class="btn btn-primary" id="btnreg">Registrar</button>';
    
-        const container = document.getElementById("button");
-        container.innerHTML = button;         
+                const container = document.getElementById("button");
+                container.innerHTML = btbreg + btnact;    
+                  $(container).toggle();
                  
              </script>
             </fieldset>
@@ -185,5 +187,5 @@
         #txtid, #btnAct, #lblid {
             display: none;
         }
-    </style>
+</style>
 
