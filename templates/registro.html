@@ -34,24 +34,33 @@
                     </div>
                 </div> <br><br> <div id="button"></div>
              <script>
-            $(document).ready(function () {
-            $("#btn-modificar").on("click", function () {
-                $("#btnAct").toggle(); // Mostrar el nuevo botón al hacer clic
-                $("#txtid").toggle();
-                $("#lblid").toggle();
-                });
-            });
-            
-                let btnact = '';
+          
                 let btnreg = '';
+                let btnact = '';
 
-                btnact = '<button type="submit" class="btn btn-primary btn-act" id="btnAct">Actualizar</button>';
+                btnact = '<button type="submit" class="btn btn-primary" id="btnAct">Actualizar</button>';
                 btnreg = '<button type="submit" class="btn btn-primary" id="btnreg">Registrar</button>';
    
                 const container = document.getElementById("button");
                 container.innerHTML = btnreg + btnact;    
-                $(container).toggle();
-                 
+
+                $(document).on("click", ".btn-modificar", function() {
+                    $(document).ready(function () {
+                            $("#btnreg").hide();
+                            $("#btnAct").show();
+                            $("#txtid").show();
+                            $("#lblid").show();
+                        });
+                });
+
+                $(document).on("click", "btnAct", function() {
+                    $(document).ready(function () {
+                            $("#btnreg").show();
+                            $("#btnAct").hide();
+                            $("#txtid").hide();
+                            $("#lblid").hide();
+                        });
+                });
              </script>
             </fieldset>
         </form>
