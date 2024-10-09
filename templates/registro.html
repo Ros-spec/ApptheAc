@@ -34,12 +34,10 @@
                     </div>
                 </div> <br><br> <div id="button"></div>
              <script>
-                    $(document).on("click", ".btn-modificar", function (event) {
-
-                    $.get("/modificar", function (respuesta) {     
                     let button = ""
-                        button = '<button type="submit" class="btn btn-primary btn-modificar">Modificar</button>'
-                    });
+                   
+                 $(document).on("click", ".btn-modificar", function (event) {     
+                    button = '<button type="submit" class="btn btn-primary btn-modificar">Modificar</button>'
                  });
                     button = '<button type="submit" class="btn btn-primary">Registrar</button>'
                     
