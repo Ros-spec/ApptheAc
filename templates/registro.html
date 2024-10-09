@@ -38,11 +38,7 @@
 
                     $.get("/modificar", function (respuesta) {     
                     let button = ""
-                        
-                    if(respuesta.method === "GET") {
-                        button = '<button type="submit" class="btn btn-primary">Modificar</button>'
-                    } 
-                        
+                        button = '<button type="submit" class="btn btn-primary btn-modificar">Modificar</button>'
                     });
                  });
                     button = '<button type="submit" class="btn btn-primary">Registrar</button>'
