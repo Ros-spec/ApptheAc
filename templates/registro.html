@@ -34,21 +34,26 @@
                     </div>
                 </div> <br><br> <div id="button"></div>
              <script>
-    
-    $.get("/modificar", { id: id }, function (respuesta) {
-        let button = '';
+            
+         $(document).ready(function () {
+            $(".btn-modificar").on("click", function () {
+                $(this).toggle(); 
+                $("#txtid").toggle(); 
+                $("#lblid").toggle(); 
+
+                 let button = '';
 
         if (respuesta.success) { 
             button = '<button type="submit" class="btn btn-primary btn-act" id="btnAct">Actualizar</button>';
         } else {
-            button = '<button type="submit" class="btn btn-primary" id="btnreg">Registrar</button>';
-        }
-
+                button = '<button type="submit" class="btn btn-primary" id="btnreg">Registrar</button>';
+            }     
+                });
+            });
+        });
+    
         const container = document.getElementById("button");
-        container.innerHTML = button; 
-    });
-
-
+        container.innerHTML = button;         
                  
              </script>
             </fieldset>
@@ -174,14 +179,6 @@
                     }
                 })
                 .catch(error => console.error("Error:", error));
-            });
-        });
-
-         $(document).ready(function () {
-            $(".btn-modificar").on("click", function () {
-                $(this).toggle(); 
-                $("#txtid").toggle(); 
-                $("#lblid").toggle(); 
             });
         });
         
