@@ -36,7 +36,7 @@
              <script>
             
          $(document).ready(function () {
-            $(".btn-modificar").on("click", function () {
+            $(".btn-modificar").on("click", function (respuesta) {
                 $(this).toggle(); 
                 $("#txtid").toggle(); 
                 $("#lblid").toggle(); 
@@ -47,10 +47,10 @@
             button = '<button type="submit" class="btn btn-primary btn-act" id="btnAct">Actualizar</button>';
         } else {
                 button = '<button type="submit" class="btn btn-primary" id="btnreg">Registrar</button>';
-            }     
-                });
+        }     
             });
         });
+
     
         const container = document.getElementById("button");
         container.innerHTML = button;         
