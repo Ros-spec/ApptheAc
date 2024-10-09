@@ -34,7 +34,7 @@
                     </div>
                 </div> <br><br> <div id="button"></div>
              <script>
-             $(document).ready(function () {
+            $(document).ready(function () {
             $("#btn-modificar").on("click", function () {
                 $("#btnAct").toggle(); // Mostrar el nuevo botón al hacer clic
                 $("#txtid").toggle();
@@ -50,7 +50,7 @@
    
                 const container = document.getElementById("button");
                 container.innerHTML = btbreg + btnact;    
-                  $(container).toggle();
+                $(container).toggle();
                  
              </script>
             </fieldset>
@@ -89,7 +89,7 @@
                                 <td>${contenido[2]}</td>
                                 <td>
                                     <input type="button" value="Eliminar" class="btn btn-danger btn-eliminar" data-id="${contenido[0]}">
-                                    <input type="button" value="Modificar" class="btn btn-primary btn-modificar" data-id="${contenido[0]}">
+                                    <input type="button" value="Modificar" class="btn btn-primary btn-modificar" data-id="${contenido[0]}" id= "btn-modificar">
                                 </td>
                             </tr>
                         `);
