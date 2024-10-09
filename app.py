@@ -75,9 +75,7 @@ def eliminar():
     cursor.close()
     con.close()
 
-    # Cambié a no pasar request.form porque eliminar no tiene datos de formulario
     Eventopusher()  # Si no se requieren datos específicos, puedes modificar esto.
-
     return make_response(jsonify({}))
 
 def save():
@@ -102,12 +100,6 @@ def save():
 def guardardatos():
     save()
     return make_response(jsonify({"success": True, "message": "Éxito"}))
-
-@app.route("/guardardatos", methods=["POST", "GET"])
-def guardardatos():
-    if request.method == "POST":
-        save() 
-        return make_response(jsonify({"success": True, "message": "Datos insertados"}))
 
 def mod():
     con = get_db_connection() 
