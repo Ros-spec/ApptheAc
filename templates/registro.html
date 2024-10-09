@@ -17,7 +17,7 @@
             <fieldset>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="txtid">ID</label>
+                        <label for="txtid" id="lblid">ID</label>
                         <input type="number" class="form-control" id="txtid" name="txtid" placeholder="ID del usuario" required min="1">
                     </div>
                     <div class="form-group col-md-6">
@@ -34,7 +34,8 @@
                     </div>
                 </div> <br><br> <div id="button"></div>
              <script>
-                    button = '<button type="submit" class="btn btn-primary btn-modificar" id="btnAct">Modificar</button>'
+                    button = '<button type="submit" class="btn btn-primary btn-act" id="btnAct">Modificar</button>'
+                    
                     button = '<button type="submit" class="btn btn-primary" id ="btnreg">Registrar</button>'
                     
                     const container = document.getElementById("button");
@@ -179,8 +180,8 @@
 </html>
 
  <style>
-        #txtid, #btnAct {
-            display: none; /* Ocultar el botón inicialmente */
+        #txtid, #btnAct, #lblid {
+            display: none;
         }
     </style>
 
