@@ -103,5 +103,34 @@ def guardardatos():
     save()
     return make_response(jsonify({"success": True, "message": "Éxito"}))
 
+@app.route("/guardardatos", methods=["POST", "GET"])
+def guardardatos():
+    if request.method == "POST":
+        save() 
+        return make_response(jsonify({"success": True, "message": "Datos insertados"}))
+
+def mod():
+    con = get_db_connection() 
+    id = request.form["txtid"]
+    nombre = request.form["txtnombre"]
+    contra = request.form["txtpass1"]
+
+    cursor = con.cursor()
+    sql = "UPDATE tst0_usuarios SET Nombre_Usuario = %s, Contrasena = %s WHERE Id_Usuario = %s"
+    val = (nombre, contra, id)
+
+    cursor.execute(sql, val)
+    con.commit()
+
+    # Eventopusher()
+
+    cursor.close() 
+    con.close() 
+    
+@app.route("/actualizardatos", methods=["POST"])  
+def actdatos():
+    mod()
+    return make_response(jsonify({"success": True, "message": "Datos Modificados"}))
+
 if __name__ == "__main__":
     app.run(debug=True)
