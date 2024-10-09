@@ -34,23 +34,20 @@
                     </div>
                 </div> <br><br> <div id="button"></div>
              <script>
-                $(document).on("click", ".btn-modificar", function (event) {
-    const id = $(this).attr("data-id"); // Asegúrate de que el botón tiene un atributo data-id
-
-    $.get("/modificar", { id: id }, function (respuesta) {
+    
+    $.get("/", { id: id }, function (respuesta) {
         let button = '';
 
-
         if (respuesta.success) { 
-            button = '<button type="submit" class="btn btn-primary btn-act" id="btnAct">Modificar</button>';
-        } else {
             button = '<button type="submit" class="btn btn-primary" id="btnreg">Registrar</button>';
+        } else {
+            button = '<button type="submit" class="btn btn-primary btn-act" id="btnAct">Actualizar</button>';
         }
 
         const container = document.getElementById("button");
         container.innerHTML = button; 
     });
-});
+
 
                  
              </script>
