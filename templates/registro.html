@@ -34,11 +34,11 @@
                     </div>
                 </div> <br><br> <div id="button"></div>
              <script>
-          
+
                 let btnreg = '';
                 let btnact = '';
 
-                btnact = '<button type="submit" class="btn btn-primary" id="btnAct">Actualizar</button>';
+                btnact = '<button type="submit" class="btn btn-primary btnAct" id="btnAct">Actualizar</button>';
                 btnreg = '<button type="submit" class="btn btn-primary" id="btnreg">Registrar</button>';
    
                 const container = document.getElementById("button");
@@ -60,6 +60,19 @@
                             $("#txtid").hide();
                             $("#lblid").hide();
                         });
+                });
+
+                $(document).ready(function() {
+                    var id = $("#txtid");
+                    id.on("input", function() {
+                        if (id.val() === '') {
+                            $("#btnreg").show();
+                            $("#btnAct").hide();
+                            $("#txtid").hide();
+                            $("#lblid").hide();
+
+                        } 
+                    });
                 });
              </script>
             </fieldset>
@@ -143,7 +156,6 @@
                 buscar();
             });
 
-            // Validación del formulario
             $.validator.addMethod("usuarioValido", function(value) {
                 return /^[A-Za-z0-9]+$/.test(value) && value.length >= 5 && value.length <= 20;
             }, "El nombre de usuario solo puede contener letras y números, sin espacios ni caracteres especiales.");
@@ -167,27 +179,36 @@
                 }
             });
 
-            $("#formR").submit(function(event) {
-                event.preventDefault();
-                var formData = $(this).serialize();
-                fetch('/guardardatos', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        console.log(data.message);
-                        buscar(); // Actualiza la tabla después de registrar
-                    } else {
-                        console.error(data.message);
+                $("#formR").submit(function(event) {
+                    event.preventDefault();
+                    var formData = $(this).serialize();
+            
+                    var url = 'registrar' ? '/guardardatos' : '/actualizardatos';
+                    
+                    var txtid = $("#txtid").val();
+                    if (txtid > 0) {
+                    url = '/actualizardatos'; 
                     }
-                })
-                .catch(error => console.error("Error:", error));
-            });
-        });
-        
+
+                    fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            console.log(data.message);
+                            buscar(); // Actualiza la tabla después de registrar o actualizar
+                        } else {
+                            console.error(data.message);
+                        }
+                    })
+                    .catch(error => console.error("Error:", error));
+                });
+            }
+        );  
+            
     </script>
 </body>
 </html>
@@ -197,4 +218,3 @@
             display: none;
         }
 </style>
-
