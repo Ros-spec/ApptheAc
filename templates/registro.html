@@ -35,13 +35,13 @@
                 </div> <br><br> <div id="button"></div>
              <script>
     
-    $.get("/", { id: id }, function (respuesta) {
+    $.get("/modificar", { id: id }, function (respuesta) {
         let button = '';
 
         if (respuesta.success) { 
-            button = '<button type="submit" class="btn btn-primary" id="btnreg">Registrar</button>';
-        } else {
             button = '<button type="submit" class="btn btn-primary btn-act" id="btnAct">Actualizar</button>';
+        } else {
+            button = '<button type="submit" class="btn btn-primary" id="btnreg">Registrar</button>';
         }
 
         const container = document.getElementById("button");
