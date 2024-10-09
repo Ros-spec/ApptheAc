@@ -34,8 +34,13 @@
                     </div>
                 </div> <br><br> <div id="button"></div>
              <script>
+                 let button = ""
+                  $(document).on("click", ".btn-modificar", function (event) {
+
+                $.get("/modificar", {id: id}, function (respuesta) {
                     button = '<button type="submit" class="btn btn-primary btn-act" id="btnAct">Modificar</button>'
-                    
+                })
+            })
                     button = '<button type="submit" class="btn btn-primary" id ="btnreg">Registrar</button>'
                     
                     const container = document.getElementById("button");
@@ -169,9 +174,10 @@
         });
 
         $(document).ready(function () {
-            $("#btnreg").click(function () {
-                $("#btnAct").show(); // Mostrar el nuevo botón al hacer clic
-                $("#txtid").show
+            $("#btnreg").on("click", function () {
+                $("#btnAct").toggle(); // Mostrar el nuevo botón al hacer clic
+                $("#txtid").toggle();
+                $("#lblid").toggle();
             });
         });
         
