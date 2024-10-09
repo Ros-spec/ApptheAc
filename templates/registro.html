@@ -112,6 +112,7 @@
                 if (confirm("¿Quieres eliminar este registro?")) {
                     var id = $(this).data("data-id");
                     $.get("/eliminar", { id: id });
+                     buscar();
                 }
             });
 
