@@ -3,7 +3,7 @@ import pusher
 import mysql.connector
 import datetime
 import pytz
-Flask from flask_cors import CORS, cross_origin
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app)
