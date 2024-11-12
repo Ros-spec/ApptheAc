@@ -80,8 +80,11 @@ def eliminar():
     Eventopusher()  # Si no se requieren datos específicos, puedes modificar esto.
     return make_response(jsonify({}))
 
-def save():
-    con = get_db_connection() 
+   
+
+@app.route("/guardardatos", methods=["POST"])  
+def guardardatos():
+     con = get_db_connection() 
     id = request.form["txtid"]
     nombre = request.form["txtnombre"]
     contra = request.form["txtpass1"]
@@ -98,9 +101,6 @@ def save():
     cursor.close() 
     con.close()     
 
-@app.route("/guardardatos", methods=["POST"])  
-def guardardatos():
-    save()
     return make_response(jsonify({"success": True, "message": "Éxito"}))
 
 def mod():
