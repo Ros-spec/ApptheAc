@@ -106,7 +106,6 @@ def guardardatos():
     
 @app.route("/actualizardatos", methods=["POST"])  
 def actdatos():
-    def mod():
     con = get_db_connection() 
     id = request.form["txtid"]
     nombre = request.form["txtnombre"]
