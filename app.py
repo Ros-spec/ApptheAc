@@ -84,7 +84,8 @@ def eliminar():
 
 @app.route("/guardardatos", methods=["POST"])  
 def guardardatos():
-     con = get_db_connection() 
+    con = get_db_connection() 
+    
     id = request.form["txtid"]
     nombre = request.form["txtnombre"]
     contra = request.form["txtpass1"]
