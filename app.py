@@ -103,8 +103,10 @@ def guardardatos():
     con.close()     
 
     return make_response(jsonify({"success": True, "message": "Éxito"}))
-
-def mod():
+    
+@app.route("/actualizardatos", methods=["POST"])  
+def actdatos():
+    def mod():
     con = get_db_connection() 
     id = request.form["txtid"]
     nombre = request.form["txtnombre"]
@@ -117,14 +119,9 @@ def mod():
     cursor.execute(sql, val)
     con.commit()
 
-    # Eventopusher()
-
+    Eventopusher()
     cursor.close() 
     con.close() 
-    
-@app.route("/actualizardatos", methods=["POST"])  
-def actdatos():
-    mod()
     return make_response(jsonify({"success": True, "message": "Datos Modificados"}))
 
 if __name__ == "__main__":
