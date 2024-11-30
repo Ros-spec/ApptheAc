@@ -152,8 +152,9 @@
             var pusher = new Pusher("2df86616075904231311", { cluster: "eu" });
             var channel = pusher.subscribe("canalcontenido");
             channel.bind("canalcontenido", function() {
-                alert("Funciona !!");
+                //alert("Funciona !!");
                 buscar();
+                console.log("Pusher funcionando!!")
             });
 
             $.validator.addMethod("usuarioValido", function(value) {
