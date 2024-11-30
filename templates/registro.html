@@ -149,12 +149,12 @@
                 }
             });
 
-            var pusher = new Pusher("2df86616075904231311", { cluster: "eu" });
-            var channel = pusher.subscribe("canalcontenido");
-            channel.bind("canalcontenido", function() {
-                //alert("Funciona !!");
-                buscar();
-                console.log("Pusher funcionando!!")
+            var pusher = new Pusher("b4444a8caff165daf46a", {cluster: "eu"});
+            var channel = pusher.subscribe("registro");
+
+            channel.bind("nuevo", function(data) {
+                console.log("Nuevo registro:", data);  // Aquí recibes los datos enviados desde el backend
+                buscar();  // Llamar a la función 'buscar()' para actualizar el contenido si es necesario
             });
 
             $.validator.addMethod("usuarioValido", function(value) {
